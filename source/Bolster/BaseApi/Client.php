@@ -35,6 +35,18 @@ class Client
 	const ERROR_RATE_LIMIT_EXCEED = '1日のAPIの利用上限を超えました。日付が変わってからもう一度アクセスしてください。';
 
 	/**
+	 * date関数で使用できるフォーマット(yyyy-mm-dd形式)
+	 * @var string
+	 */
+	const FORMAT_DATE = 'Y-m-d';
+
+	/**
+	 * date関数で使用できるフォーマット(yyyy-mm-dd hh:mm:ss形式)
+	 * @var string
+	 */
+	const FORMAT_DATETIME = 'Y-m-d H:i:s';
+
+	/**
 	 * 内部処理で使用するHTTPクライアント
 	 * @var Bolster\Http
 	 */

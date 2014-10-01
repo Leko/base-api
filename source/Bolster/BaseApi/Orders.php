@@ -9,18 +9,6 @@ namespace Bolster\BaseApi;
 class Orders extends Client
 {
 	/**
-	 * date関数で使用できるフォーマット(yyyy-mm-dd形式)
-	 * @var string
-	 */
-	const FORMAT_DATE = 'Y-m-d';
-
-	/**
-	 * date関数で使用できるフォーマット(yyyy-mm-dd hh:mm:ss形式)
-	 * @var string
-	 */
-	const FORMAT_DATETIME = 'Y-m-d H:i:s';
-
-	/**
 	 * ステータス：配送済み
 	 * @var string
 	 */
