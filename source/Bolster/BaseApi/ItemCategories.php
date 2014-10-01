@@ -8,17 +8,17 @@ namespace Bolster\BaseApi;
  */
 class ItemCategories extends Client
 {
-
 	/**
 	 * 商品のカテゴリー情報を取得
 	 * 
 	 * GET /1/item_categories/detail/:item_id
 	 * @see https://gist.github.com/baseinc/b39113c649b30878c480
 	 * 
+	 * @param int $item_id カテゴリを取得したい商品ID
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function :item_id(array $params = array()) {
-		return $this->request('get', '/1/item_categories/detail/:item_id', $params);
+	public function detail($item_id) {
+		return $this->request('get', '/1/item_categories/detail/'.$item_id);
 	}
 
 	/**
@@ -28,8 +28,8 @@ class ItemCategories extends Client
 	 * @see https://gist.github.com/baseinc/96314f42e4db05df2513
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX item_id 商品ID (必須)
-	 *   @param XXXXX category_id カテゴリーID (任意)
+	 *   @param int item_id     商品ID (必須)
+	 *   @param int category_id カテゴリーID (任意)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function add(array $params = array()) {
@@ -43,7 +43,7 @@ class ItemCategories extends Client
 	 * @see https://gist.github.com/baseinc/4d966562aeb6344f6fc4
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX item_category_id 商品カテゴリーID (必須)
+	 *   @param int item_category_id 商品カテゴリーID (必須)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function delete(array $params = array()) {
