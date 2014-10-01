@@ -48,7 +48,7 @@ class Client
 
 	/**
 	 * 内部処理で使用するHTTPクライアント
-	 * @var Bolster\Http
+	 * @var HttpRequestable
 	 */
 	protected $http;
 
@@ -117,11 +117,6 @@ class Client
 	 */
 	public function __construct(array $config = array())
 	{
-		$this->http = new \Bolster\Http();
-
-		// BASE APIのレスポンスは全てJSON形式なので、レスポンスをJSON形式でパースする
-		$this->http->setParser(new \Bolster\Http\Parser\JsonParser());
-
 		$this->setConfig($config);
 	}
 
@@ -147,11 +142,6 @@ class Client
 			}
 
 			$this->{$property} = $value;
-
-			// 設定された項目がアクセストークンだったらAuthorizationヘッダもセットする
-			if($property === 'access_token') {
-				$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
-			}
 		}
 	}
 
@@ -186,6 +176,17 @@ class Client
 	}
 
 	/**
+	 * 通信を行うためのHTTPクライアントクラスのインスタンスをセットする
+	 * 
+	 * NOTE: 渡されるHTTPクライアントはHttpRequestableインタフェースを実装している必要がある。
+	 * @param HttpRequestable $http HTTPクライアントクラス
+	 * @return void
+	 */
+	public function setHttpClient(HttpRequestable $http) {
+		$this->http = $http;
+	}
+
+	/**
 	 * BASE APIへリクエストを行う
 	 * 
 	 * @param string $method get|post|put|deleteのいずれか
@@ -199,9 +200,10 @@ class Client
 		$lower_method = strtolower($method);
 		$url          = $this->host.$path;
 
-		$this->beforeSend($method, $url, $params);
+		// アクセストークンをヘッダにセットする
+		$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
+
 		$response = $this->http->{$lower_method}($url, $params);
-		$this->afterSend($method, $url, $params, $params);
 
 		if($response['error']) {
 			$this->errorHandle($response['error'], $response['error_description']);
@@ -209,28 +211,6 @@ class Client
 			return $response;
 		}
 	}
-
-	/**
-	 * BASE APIへリクエストする直前に呼び出されるフックポイント
-	 * NOTE: デフォルトでは何もしないので必要に応じて拡張すること
-	 * 
-	 * @param string $method 使用するHTTPメソッド
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params APIに送信するパラメータ
-	 * @return void
-	 */
-	protected function beforeSend($method, $url, array $params) {}
-
-	/**
-	 * BASE APIへリクエストした直後に呼び出されるフックポイント
-	 * NOTE: デフォルトでは何もしないので必要に応じて拡張すること
-	 * 
-	 * @param string $method 使用するHTTPメソッド
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params APIに送信するパラメータ
-	 * @return void
-	 */
-	protected function afterSend($method, $url, array $params, $response) {}
 
 	/**
 	 * BASE APIへリクエストを送信しエラーのレスポンスが帰ってきた際に呼び出されるフックポイント
