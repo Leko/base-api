@@ -273,7 +273,7 @@ class Client
 	 */
 	public function itemcategories()
 	{
-		return new Itemcategories($this->getConfig());
+		return new ItemCategories($this->getConfig());
 	}
 
 	/**
