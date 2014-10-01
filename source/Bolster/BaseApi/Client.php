@@ -9,6 +9,12 @@ namespace Bolster\BaseApi;
 class Client
 {
 	/**
+	 * アクセストークンとセットでヘッダに付与するトークンの形式
+	 * @var string
+	 */
+	const TOKEN_TYPE = 'Bearer';
+
+	/**
 	 * アクセストークンの期限切れ時のエラーメッセージ
 	 * 
 	 * NOTE: エラーコードに統一性がないのでエラーメッセージで比較を行う
@@ -124,7 +130,7 @@ class Client
 
 			// 設定された項目がアクセストークンだったらAuthorizationヘッダもセットする
 			if($property === 'access_token') {
-				$this->http->setHeaders('Authorization', $value);
+				$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
 			}
 		}
 	}
