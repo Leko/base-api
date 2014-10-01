@@ -16,7 +16,7 @@ class Users extends Client
 	 * 
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function me(array $params = array()) {
+	public function me() {
 		return $this->request('get', '/1/users/me', $params);
 	}
 }
