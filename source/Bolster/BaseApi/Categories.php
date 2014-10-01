@@ -8,8 +8,6 @@ namespace Bolster\BaseApi;
  */
 class Categories extends Client
 {
-
-
 	/**
 	 * カテゴリー情報の一覧を取得
 	 * 
@@ -18,7 +16,7 @@ class Categories extends Client
 	 * 
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function categories(array $params = array()) {
+	public function categories() {
 		return $this->request('get', '/1/categories', $params);
 	}
 
@@ -29,8 +27,8 @@ class Categories extends Client
 	 * @see https://gist.github.com/baseinc/983254bab52854cde97f
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX name カテゴリー名 (必須)
-	 *   @param XXXXX list_order カテゴリーの並び順 (任意)
+	 *   @param string name       カテゴリー名 (必須)
+	 *   @param int    list_order カテゴリーの並び順 (任意)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function add(array $params = array()) {
@@ -44,9 +42,9 @@ class Categories extends Client
 	 * @see https://gist.github.com/baseinc/bc7ff96fbe0dec990dd1
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX category_id カテゴリーID (必須)
-	 *   @param XXXXX name カテゴリー名 (任意)
-	 *   @param XXXXX list_order カテゴリーの並び順 (任意)
+	 *   @param int    category_id カテゴリーID (必須)
+	 *   @param string name        カテゴリー名 (任意)
+	 *   @param int    list_order  カテゴリーの並び順 (任意)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function edit(array $params = array()) {
@@ -60,7 +58,7 @@ class Categories extends Client
 	 * @see https://gist.github.com/baseinc/c58b07a2489f77879e67
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX category_id カテゴリーID (必須)
+	 *   @param int category_id カテゴリーID (必須)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function delete(array $params = array()) {
