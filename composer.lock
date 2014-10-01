@@ -3,8 +3,9 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4d065dc52d5f92e76b9aaaa275ad4a65",
-    "packages": [
+    "hash": "b2a2e05538bcb66a3aa548f3ad9c57ea",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "bolster/http",
             "version": "0.8",
@@ -35,9 +36,7 @@
             ],
             "description": "Http wrapper",
             "time": "2014-08-27 03:40:20"
-        }
-    ],
-    "packages-dev": [
+        },
         {
             "name": "ocramius/instantiator",
             "version": "1.1.3",
