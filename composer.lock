@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "6cb7465ba7d826e985027ab21eac0a39",
+    "packages": [
+        {
+            "name": "bolster/http",
+            "version": "0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Leko/http.git",
+                "reference": "e7d757ba8598748a1f1928e6b557a038549e8c62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Leko/http/zipball/e7d757ba8598748a1f1928e6b557a038549e8c62",
+                "reference": "e7d757ba8598748a1f1928e6b557a038549e8c62",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leko",
+                    "email": "leko.noor@gmail.com"
+                }
+            ],
+            "description": "Http wrapper",
+            "time": "2014-08-27 03:40:20"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "platform": [],
+    "platform-dev": []
+}

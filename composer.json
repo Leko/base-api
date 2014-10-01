@@ -8,5 +8,7 @@
             "email": "leko.noor@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "bolster/http": "*"
+    }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" stopOnFailure="false">
+	<php></php>
+
+	<testsuites>
+		<testsuite name="all">
+			<file>Http.php</file>
+			<directory suffix=".php">Http</directory>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<blacklist>
+			<directory suffix=".php">../vendor</directory>
+		</blacklist>
+	</filter>
+</phpunit>
