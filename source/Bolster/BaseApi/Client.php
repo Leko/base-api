@@ -53,6 +53,14 @@ class Client
 	protected $http;
 
 	/**
+	 * BASE APIのエンドポイント
+	 * NOTE: ステージング環境用のホストに書き換えたり、上書きできる方が柔軟性が高いためconstではなくプロパティ
+	 * 
+	 * @var string
+	 */
+	protected $host = 'https://api.thebase.in';
+
+	/**
 	 * BASE APIで利用するクライアントID
 	 * @var string
 	 */
