@@ -205,9 +205,7 @@ class Client
 		$lower_method = strtolower($method);
 		$url          = $this->host.$path;
 
-		$this->beforeSend($method, $url, $params);
 		$response = $this->http->{$lower_method}($url, $params);
-		$this->afterSend($method, $url, $params, $params);
 
 		if($response['error']) {
 			$this->errorHandle($response['error'], $response['error_description']);
@@ -215,28 +213,6 @@ class Client
 			return $response;
 		}
 	}
-
-	/**
-	 * BASE APIへリクエストする直前に呼び出されるフックポイント
-	 * NOTE: デフォルトでは何もしないので必要に応じて拡張すること
-	 * 
-	 * @param string $method 使用するHTTPメソッド
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params APIに送信するパラメータ
-	 * @return void
-	 */
-	protected function beforeSend($method, $url, array $params) {}
-
-	/**
-	 * BASE APIへリクエストした直後に呼び出されるフックポイント
-	 * NOTE: デフォルトでは何もしないので必要に応じて拡張すること
-	 * 
-	 * @param string $method 使用するHTTPメソッド
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params APIに送信するパラメータ
-	 * @return void
-	 */
-	protected function afterSend($method, $url, array $params, $response) {}
 
 	/**
 	 * BASE APIへリクエストを送信しエラーのレスポンスが帰ってきた際に呼び出されるフックポイント
