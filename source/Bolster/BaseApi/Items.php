@@ -61,7 +61,7 @@ class Items extends Client
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function detail($item_id) {
-		return $this->request('get', '/1/items/detail/:item_id', $params);
+		return $this->request('get', '/1/items/detail/'.$item_id);
 	}
 
 	/**
