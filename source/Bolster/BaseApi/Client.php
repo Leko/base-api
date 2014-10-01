@@ -142,11 +142,6 @@ class Client
 			}
 
 			$this->{$property} = $value;
-
-			// 設定された項目がアクセストークンだったらAuthorizationヘッダもセットする
-			if($property === 'access_token') {
-				$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
-			}
 		}
 	}
 
@@ -204,6 +199,9 @@ class Client
 	{
 		$lower_method = strtolower($method);
 		$url          = $this->host.$path;
+
+		// アクセストークンをヘッダにセットする
+		$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
 
 		$response = $this->http->{$lower_method}($url, $params);
 
