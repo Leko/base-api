@@ -1,0 +1,12 @@
+{
+    "name": "bolster/base-api",
+    "description": "BASE API client for PHP(https://developers.thebase.in)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Leko",
+            "email": "leko.noor@gmail.com"
+        }
+    ],
+    "require": {}
+}
