@@ -48,7 +48,7 @@ class Client
 
 	/**
 	 * 内部処理で使用するHTTPクライアント
-	 * @var Bolster\Http
+	 * @var HttpRequestable
 	 */
 	protected $http;
 
@@ -117,11 +117,6 @@ class Client
 	 */
 	public function __construct(array $config = array())
 	{
-		$this->http = new \Bolster\Http();
-
-		// BASE APIのレスポンスは全てJSON形式なので、レスポンスをJSON形式でパースする
-		$this->http->setParser(new \Bolster\Http\Parser\JsonParser());
-
 		$this->setConfig($config);
 	}
 
@@ -183,6 +178,17 @@ class Client
 
 			return $this->{$property};
 		}
+	}
+
+	/**
+	 * 通信を行うためのHTTPクライアントクラスのインスタンスをセットする
+	 * 
+	 * NOTE: 渡されるHTTPクライアントはHttpRequestableインタフェースを実装している必要がある。
+	 * @param HttpRequestable $http HTTPクライアントクラス
+	 * @return void
+	 */
+	public function setHttpClient(HttpRequestable $http) {
+		$this->http = $http;
 	}
 
 	/**
