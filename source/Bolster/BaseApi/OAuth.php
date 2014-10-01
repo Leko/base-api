@@ -9,56 +9,96 @@ namespace Bolster\BaseApi;
 class OAuth extends Client
 {
 	/**
+	 * authorizeで使用するレスポンスの形式
+	 * @var string
+	 */
+	const RESPONSE_TYPE_CODE = 'code';
+
+	/**
+	 * tokenで使用するgrant_typeの値
+	 * @var string
+	 */
+	const GRANT_TYPE_AUTHORIZATION_CODE = 'authorization_code';
+
+	/**
+	 * refreshで使用するgrant_typeの値
+	 * @var string
+	 */
+	const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token';
+
+	/**
 	 * 認可コードを取得
 	 * 
 	 * GET /1/oauth/authorize
 	 * @see https://gist.github.com/baseinc/9777239
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX response_type code (必須)
-	 *   @param XXXXX client_id クライアントID (必須)
-	 *   @param XXXXX redirect_uri 登録したコールバックURL (必須)
-	 *   @param XXXXX scope スコープをスペース区切りで指定 (任意 デフォルト: read_users)
-	 *   @param XXXXX state リダイレクト先URLにそのまま返すパラメーター (任意)
+	 *   @param string state リダイレクト先URLにそのまま返すパラメーター (任意)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function authorize(array $params = array()) {
+		$params['response_type'] = self::RESPONSE_TYPE_CODE;
+		$params['client_id']     = $this->client_id;
+		$params['redirect_uri']  = $this->redirect_uri;
+		$params['scope']         = implode(' ', $this->scopes);
+
 		return $this->request('get', '/1/oauth/authorize', $params);
 	}
 
 	/**
 	 * 認可コードからアクセストークンを取得
 	 * 
+	 * NOTE: レスポンスで認証情報が得られたら自動的にaccess_token,refresh_tokenにセットする
+	 *       よってこのメソッドを使用するなら明示的にアクセストークンとリフレッシュトークンを再セットする必要はない
+	 * 
 	 * POST /1/oauth/token
 	 * @see https://gist.github.com/baseinc/9777762
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX grant_type authorization_code (必須)
-	 *   @param XXXXX client_id クライアントID (必須)
-	 *   @param XXXXX client_secret クライアントシークレット (必須)
-	 *   @param XXXXX code 認可コード (必須)
-	 *   @param XXXXX redirect_uri 登録したコールバックURL (必須)
+	 *   @param string code 認可コード (必須)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
 	public function token(array $params = array()) {
-		return $this->request('post', '/1/oauth/token', $params);
+		$params['grant_type']    = self::GRANT_TYPE_AUTHORIZATION_CODE;
+		$params['client_id']     = $this->client_id;
+		$params['client_secret'] = $this->client_secret;
+		$params['redirect_uri']  = $this->redirect_uri;
+
+		// NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
+		$credentials = $this->request('post', '/1/oauth/token', $params);
+
+		$this->set('access_token', $credentials['access_token']);
+		$this->set('refresh_token', $credentials['refresh_token']);
+
+		return $credentials;
 	}
 
 	/**
 	 * リフレッシュトークンからアクセストークンを取得
 	 * 
+	 * NOTE: レスポンスで認証情報が得られたら自動的にaccess_token,refresh_tokenにセットする
+	 *       よってこのメソッドを使用するなら明示的にアクセストークンとリフレッシュトークンを再セットする必要はない
+	 * 
+	 * NOTE: メソッド名がAPI名と異なる。tokenは先に使われているので別の名前を採用。
+	 * 
 	 * POST /1/oauth/token
 	 * @see https://gist.github.com/baseinc/9778140
 	 * 
-	 * @param array $params 指定可能なオプションは以下を参照
-	 *   @param XXXXX grant_type refresh_token (必須)
-	 *   @param XXXXX client_id クライアントID (必須)
-	 *   @param XXXXX client_secret クライアントシークレット (必須)
-	 *   @param XXXXX refresh_token リフレッシュトークン (必須)
-	 *   @param XXXXX redirect_uri 登録したコールバックURL (必須)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function token(array $params = array()) {
-		return $this->request('post', '/1/oauth/token', $params);
+	public function refresh() {
+		$params['grant_type']    = self::GRANT_TYPE_REFRESH_TOKEN;
+		$params['client_id']     = $this->client_id;
+		$params['client_secret'] = $this->client_secret;
+		$params['redirect_uri']  = $this->redirect_uri;
+		$params['refresh_token'] = $this->refresh_token;
+
+		// NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
+		$credentials = $this->request('post', '/1/oauth/token', $params);
+
+		$this->set('access_token', $credentials['access_token']);
+		$this->set('refresh_token', $credentials['refresh_token']);
+
+		return $credentials;
 	}
 }
