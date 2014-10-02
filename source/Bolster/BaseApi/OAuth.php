@@ -27,14 +27,14 @@ class OAuth extends Client
 	const GRANT_TYPE_REFRESH_TOKEN = 'refresh_token';
 
 	/**
-	 * 認可コードを取得
+	 * 認可コードを取得するための画面へ遷移するURLを生成する
 	 * 
 	 * GET /1/oauth/authorize
 	 * @see https://gist.github.com/baseinc/9777239
 	 * 
 	 * @param array $params 指定可能なオプションは以下を参照
 	 *   @param string state リダイレクト先URLにそのまま返すパラメーター (任意)
-	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
+	 * @return void 認証画面のURLを返却する
 	 */
 	public function authorize(array $params = array()) {
 		$params['response_type'] = self::RESPONSE_TYPE_CODE;
@@ -42,7 +42,8 @@ class OAuth extends Client
 		$params['redirect_uri']  = $this->redirect_uri;
 		$params['scope']         = implode(' ', $this->scopes);
 
-		return $this->request('get', '/1/oauth/authorize', $params);
+		$url = $this->host.'/1/oauth/authorize?'.http_build_query($params);
+		return $url;
 	}
 
 	/**
