@@ -226,13 +226,16 @@ class Client
 	 * @throws BaseApiException 例外クラスかそのサブクラス
 	 */
 	protected function errorHandle($error, $error_description) {
-		switch($error_description) {
-			case self::ERROR_EXPIRED_ACCESS_TOKEN:
-				$exception_class = 'ExpiredAccessTokenException';
-			case self::ERROR_RATE_LIMIT_EXCEED:
-				$exception_class = 'RateLimitExceedException';
-			default:
-				$exception_class = 'BaseApiException';
+		// NOTE: アクセストークンが無効です。のエラーは空送信した場合も起こる。
+		//       しかしアクセストークンがセットされていない場合は期限切れではないので別扱いする
+		if(!is_null($this->access_token) && $error_description === self::ERROR_EXPIRED_ACCESS_TOKEN) {
+			$exception_class = 'ExpiredAccessTokenException';
+
+		} elseif($error_description === self::ERROR_RATE_LIMIT_EXCEED) {
+			$exception_class = 'RateLimitExceedException';
+
+		} else {
+			$exception_class = 'BaseApiException';
 		}
 
 		$exception_class = __NAMESPACE__ . '\\' . $exception_class;
