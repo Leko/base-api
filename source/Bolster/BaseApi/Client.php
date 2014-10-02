@@ -201,11 +201,11 @@ class Client
 		$url          = $this->host.$path;
 
 		// アクセストークンをヘッダにセットする
-		$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$value);
+		$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$this->access_token);
 
 		$response = $this->http->{$lower_method}($url, $params);
 
-		if($response['error']) {
+		if(isset($response['error'])) {
 			$this->errorHandle($response['error'], $response['error_description']);
 		} else {
 			return $response;
@@ -226,12 +226,13 @@ class Client
 	 * @throws BaseApiException 例外クラスかそのサブクラス
 	 */
 	protected function errorHandle($error, $error_description) {
-		if($error_description === self::ERROR_EXPIRED_ACCESS_TOKEN) {
-			$exception_class = 'ExpiredAccessTokenException';
-		} elseif($error_description === self::ERROR_RATE_LIMIT_EXCEED) {
-			$exception_class = 'RateLimitExceedException';
-		} else {
-			$exception_class = 'BaseApiException';
+		switch($error_description) {
+			case self::ERROR_EXPIRED_ACCESS_TOKEN:
+				$exception_class = '\Bolster\BaseApi\ExpiredAccessTokenException';
+			case self::ERROR_RATE_LIMIT_EXCEED:
+				$exception_class = '\Bolster\BaseApi\RateLimitExceedException';
+			default:
+				$exception_class = '\Bolster\BaseApi\BaseApiException';
 		}
 
 		throw new $exception_class($error_description, $error);
@@ -243,7 +244,10 @@ class Client
 	 */
 	public function oauth()
 	{
-		return new OAuth($this->getConfig());
+		$oauth = new OAuth($this->getConfig());
+		$oauth->setHttpClient($this->http);
+
+		return $oauth;
 	}
 
 	/**
@@ -252,7 +256,10 @@ class Client
 	 */
 	public function users()
 	{
-		return new Users($this->getConfig());
+		$users = new Users($this->getConfig());
+		$users->setHttpClient($this->http);
+
+		return $users;
 	}
 
 	/**
@@ -261,7 +268,10 @@ class Client
 	 */
 	public function items()
 	{
-		return new Items($this->getConfig());
+		$items = new Items($this->getConfig());
+		$items->setHttpClient($this->http);
+
+		return $items;
 	}
 
 	/**
@@ -270,7 +280,10 @@ class Client
 	 */
 	public function categories()
 	{
-		return new Categories($this->getConfig());
+		$categories = new Categories($this->getConfig());
+		$categories->setHttpClient($this->http);
+
+		return $categories;
 	}
 
 	/**
@@ -279,7 +292,10 @@ class Client
 	 */
 	public function itemcategories()
 	{
-		return new ItemCategories($this->getConfig());
+		$itemcategories = new ItemCategories($this->getConfig());
+		$itemcategories->setHttpClient($this->http);
+
+		return $itemcategories;
 	}
 
 	/**
@@ -288,7 +304,10 @@ class Client
 	 */
 	public function orders()
 	{
-		return new Orders($this->getConfig());
+		$orders = new Orders($this->getConfig());
+		$orders->setHttpClient($this->http);
+
+		return $orders;
 	}
 
 	/**
@@ -297,6 +316,9 @@ class Client
 	 */
 	public function savings()
 	{
-		return new Savings($this->getConfig());
+		$savings = new Savings($this->getConfig());
+		$savings->setHttpClient($this->http);
+
+		return $savings;
 	}
 }
