@@ -1,29 +1,35 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "b2a2e05538bcb66a3aa548f3ad9c57ea",
+    "hash": "148bb74f83828b2839b38eacc8e0fd43",
     "packages": [],
     "packages-dev": [
         {
             "name": "bolster/http",
-            "version": "0.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Leko/http.git",
-                "reference": "e7d757ba8598748a1f1928e6b557a038549e8c62"
+                "reference": "8a7a7ee7009e470a72ed3c560920a8fc4e18a7a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Leko/http/zipball/e7d757ba8598748a1f1928e6b557a038549e8c62",
-                "reference": "e7d757ba8598748a1f1928e6b557a038549e8c62",
+                "url": "https://api.github.com/repos/Leko/http/zipball/8a7a7ee7009e470a72ed3c560920a8fc4e18a7a5",
+                "reference": "8a7a7ee7009e470a72ed3c560920a8fc4e18a7a5",
                 "shasum": ""
             },
             "require-dev": {
                 "phpunit/phpunit": "4.*"
             },
             "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bolster\\": "source/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -35,7 +41,7 @@
                 }
             ],
             "description": "Http wrapper",
-            "time": "2014-08-27 03:40:20"
+            "time": "2014-08-29 06:34:02"
         },
         {
             "name": "ocramius/instantiator",
@@ -846,7 +852,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bolster/http": 20
+    },
+    "prefer-stable": false,
     "platform": [],
     "platform-dev": []
 }
