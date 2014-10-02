@@ -241,15 +241,35 @@ class Client
 	}
 
 	/**
+	 * 各種APIクライアントクラスのインスタンスを生成する
+	 * 
+	 * 存在しないクラスを指定したら例外をスローする
+	 * 
+	 * @param string $name 生成するクライアントクラスの名前
+	 * @return Client Clientを継承した各APIのクライアントクラス
+	 */
+	protected function factory($name)
+	{
+		$client_class = __NAMESPACE__ . '\\' . $name;
+
+		if(!class_exists($client_class)) {
+			throw new \LogicException('存在しないクラス名が指定されています：'.$name);
+		}
+
+		$instance = new $client_class($this->getConfig());
+		$instance->setHttpClient($this->http);
+
+		return $instance;
+	}
+
+	/**
 	 * OAuthのインスタンスを生成する
 	 * @return OAuth このインスタンスの設定を引き継いたOAuthクラスのインスタンス
 	 */
 	public function oauth()
 	{
-		$oauth = new OAuth($this->getConfig());
-		$oauth->setHttpClient($this->http);
-
-		return $oauth;
+		$instance = $this->factory('OAuth');
+		return $instance;
 	}
 
 	/**
@@ -258,10 +278,8 @@ class Client
 	 */
 	public function users()
 	{
-		$users = new Users($this->getConfig());
-		$users->setHttpClient($this->http);
-
-		return $users;
+		$instance = $this->factory('Users');
+		return $instance;
 	}
 
 	/**
@@ -270,10 +288,8 @@ class Client
 	 */
 	public function items()
 	{
-		$items = new Items($this->getConfig());
-		$items->setHttpClient($this->http);
-
-		return $items;
+		$instance = $this->factory('Items');
+		return $instance;
 	}
 
 	/**
@@ -282,10 +298,8 @@ class Client
 	 */
 	public function categories()
 	{
-		$categories = new Categories($this->getConfig());
-		$categories->setHttpClient($this->http);
-
-		return $categories;
+		$instance = $this->factory('Categories');
+		return $instance;
 	}
 
 	/**
@@ -294,10 +308,8 @@ class Client
 	 */
 	public function itemcategories()
 	{
-		$itemcategories = new ItemCategories($this->getConfig());
-		$itemcategories->setHttpClient($this->http);
-
-		return $itemcategories;
+		$instance = $this->factory('ItemCategories');
+		return $instance;
 	}
 
 	/**
@@ -306,10 +318,8 @@ class Client
 	 */
 	public function orders()
 	{
-		$orders = new Orders($this->getConfig());
-		$orders->setHttpClient($this->http);
-
-		return $orders;
+		$instance = $this->factory('Orders');
+		return $instance;
 	}
 
 	/**
@@ -318,9 +328,7 @@ class Client
 	 */
 	public function savings()
 	{
-		$savings = new Savings($this->getConfig());
-		$savings->setHttpClient($this->http);
-
-		return $savings;
+		$instance = $this->factory('Savings');
+		return $instance;
 	}
 }
