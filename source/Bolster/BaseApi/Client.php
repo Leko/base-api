@@ -228,12 +228,14 @@ class Client
 	protected function errorHandle($error, $error_description) {
 		switch($error_description) {
 			case self::ERROR_EXPIRED_ACCESS_TOKEN:
-				$exception_class = '\Bolster\BaseApi\ExpiredAccessTokenException';
+				$exception_class = 'ExpiredAccessTokenException';
 			case self::ERROR_RATE_LIMIT_EXCEED:
-				$exception_class = '\Bolster\BaseApi\RateLimitExceedException';
+				$exception_class = 'RateLimitExceedException';
 			default:
-				$exception_class = '\Bolster\BaseApi\BaseApiException';
+				$exception_class = 'BaseApiException';
 		}
+
+		$exception_class = '\\Bolster\\BaseApi\\'.$exception_class;
 
 		throw new $exception_class($error_description, $error);
 	}
