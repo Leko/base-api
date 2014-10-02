@@ -235,7 +235,7 @@ class Client
 				$exception_class = 'BaseApiException';
 		}
 
-		$exception_class = '\\Bolster\\BaseApi\\'.$exception_class;
+		$exception_class = __NAMESPACE__ . '\\' . $exception_class;
 
 		throw new $exception_class($error_description, $error);
 	}
