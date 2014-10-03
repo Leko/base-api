@@ -15,41 +15,24 @@ class OAuth extends Common {
 			'client_id' => CLIENT_ID,
 			'client_secret' => CLIENT_SECRET,
 			'redirect_uri' => REDIRECT_URI,
+			'access_token' => ACCESS_TOKEN,
+			'refresh_token' => REFRESH_TOKEN,
 		]);
-		$this->client->setHttpClient(new MockHttpClient());
+
+		$mock = new MockHttpClient();
+		$mock->setParser(new \Bolster\Http\Parser\JsonParser());
+		$this->client->setHttpClient($mock);
 	}
 
-	function test_authorize_戻り値のURLのプロトコルはhttps() {
-		$url = $this->client->oauth()->authorize();
-		$parsed = parse_url($url);
-
-		$this->assertEquals('https', $parsed['scheme']);
-	}
-	function test_authorize_戻り値のURLのホストはapi_thebase_in() {
-		$url = $this->client->oauth()->authorize();
-		$parsed = parse_url($url);
-
-		$this->assertEquals('api.thebase.in', $parsed['host']);
-	}
-	function test_authorize_戻り値のURLにresponse_typeが含まれている() {
+	function test_authorize() {
 		$url = $this->client->oauth()->authorize();
 		$parsed = parse_url($url);
 		parse_str($parsed['query'], $query);
 
-		$this->assertArrayHasKey('response_type', $query);
-	}
-	function test_authorize_戻り値のURLにclient_idが含まれている() {
-		$url = $this->client->oauth()->authorize();
-		$parsed = parse_url($url);
-		parse_str($parsed['query'], $query);
-
-		$this->assertArrayHasKey('client_id', $query);
-	}
-	function test_authorize_戻り値のURLにredirect_uriが含まれている() {
-		$url = $this->client->oauth()->authorize();
-		$parsed = parse_url($url);
-		parse_str($parsed['query'], $query);
-
-		$this->assertArrayHasKey('redirect_uri', $query);
+		$this->assertEquals('https', $parsed['scheme'], 'URLのプロトコルはhttps');
+		$this->assertEquals('api.thebase.in', $parsed['host'], 'URLのホストはapi_thebase_in');
+		$this->assertArrayHasKey('response_type', $query, 'URLにresponse_typeが含まれている');
+		$this->assertArrayHasKey('client_id', $query, 'URLにclient_idが含まれている');
+		$this->assertArrayHasKey('redirect_uri', $query, 'URLにredirect_uriが含まれている');
 	}
 }
