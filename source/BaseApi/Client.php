@@ -197,6 +197,10 @@ class Client
 	 */
 	protected function request($method, $path, array $params = array())
 	{
+		if(!($this->http instanceof HttpRequestable)) {
+			throw new \RuntimeException('httpクライアントが指定されていません');
+		}
+
 		$lower_method = strtolower($method);
 		$url          = $this->host.$path;
 
