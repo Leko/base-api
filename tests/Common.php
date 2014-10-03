@@ -2,4 +2,6 @@
 
 namespace Bolster\BaseApi\Tests;
 
-abstract class Common extends PHPUnit_Framework_TestCase {}
+require_once __DIR__.'/../vendor/autoload.php';
+
+abstract class Common extends \PHPUnit_Framework_TestCase {}
