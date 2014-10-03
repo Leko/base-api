@@ -17,6 +17,24 @@ require_once __DIR__.'/../source/BaseApi/ExpiredAccessTokenException.php';
 require_once __DIR__.'/../source/BaseApi/RateLimitExceedException.php';
 
 abstract class Common extends \PHPUnit_Framework_TestCase {
+    protected $client;
+
+    public function setUp()
+    {
+        $this->client = new \Bolster\BaseApi\Client([
+            'client_id' => CLIENT_ID,
+            'client_secret' => CLIENT_SECRET,
+            'redirect_uri' => REDIRECT_URI,
+            'access_token' => ACCESS_TOKEN,
+            'refresh_token' => REFRESH_TOKEN,
+        ]);
+
+        $mock = new MockHttpClient();
+        $mock->setParser(new \Bolster\Http\Parser\JsonParser());
+
+        $this->client->setHttpClient($mock);
+    }
+
     protected function getProperty($class, $property)
     {
         $class = new \ReflectionClass($class);
