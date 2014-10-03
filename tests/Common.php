@@ -16,4 +16,24 @@ require_once __DIR__.'/../source/BaseApi/BaseApiException.php';
 require_once __DIR__.'/../source/BaseApi/ExpiredAccessTokenException.php';
 require_once __DIR__.'/../source/BaseApi/RateLimitExceedException.php';
 
-abstract class Common extends \PHPUnit_Framework_TestCase {}
+abstract class Common extends \PHPUnit_Framework_TestCase {
+    protected function getProperty($class, $property)
+    {
+        $class = new \ReflectionClass($class);
+
+        $property = $class->getProperty($property);
+        $property->setAccessible(true);
+
+        return $property;
+    }
+
+    protected function getMethod($class, $method)
+    {
+        $class = new \ReflectionClass($class);
+
+        $method = $class->getMethod($method);
+        $method->setAccessible(true);
+
+        return $method;
+    }
+}
