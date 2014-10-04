@@ -21,18 +21,38 @@ abstract class Common extends \PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->client = new \Bolster\BaseApi\Client([
+        $this->client = static::getBaseApiClient();
+    }
+
+    /**
+     * BASE APIのクライアントを取得する
+     * 
+     * @return \Bolster\BaseApi\Client BASE APIのクライアント
+     */
+    protected static function getBaseApiClient()
+    {
+        $client = new \Bolster\BaseApi\Client([
             'client_id' => CLIENT_ID,
             'client_secret' => CLIENT_SECRET,
             'redirect_uri' => REDIRECT_URI,
             'access_token' => ACCESS_TOKEN,
             'refresh_token' => REFRESH_TOKEN,
+            'scopes' => [
+                \Bolster\BaseApi\Client::SCOPE_READ_USERS,
+                \Bolster\BaseApi\Client::SCOPE_READ_USERS_MAIL,
+                \Bolster\BaseApi\Client::SCOPE_READ_ITEMS,
+                \Bolster\BaseApi\Client::SCOPE_READ_ORDERS,
+                \Bolster\BaseApi\Client::SCOPE_READ_SAVINGS,
+                \Bolster\BaseApi\Client::SCOPE_WRITE_ITEMS,
+                \Bolster\BaseApi\Client::SCOPE_WRITE_ORDERS,
+            ]
         ]);
 
         $mock = new MockHttpClient();
         $mock->setParser(new \Bolster\Http\Parser\JsonParser());
 
-        $this->client->setHttpClient($mock);
+        $client->setHttpClient($mock);
+        return $client;
     }
 
     protected function getProperty($class, $property)
