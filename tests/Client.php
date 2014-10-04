@@ -154,12 +154,12 @@ class Client extends Common {
 		$request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_ACCESS_TOKEN]);
 
 		// 使用制限切れならRateLimitExceedExceptionをスローする
-		// $this->setExpectedException('\Bolster\BaseApi\RateLimitExceedException');
-		// $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_RATE_LIMIT]);
+		$this->setExpectedException('\Bolster\BaseApi\RateLimitExceedException');
+		$request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_RATE_LIMIT]);
 
 		// それ以外ならBaseApiExceptionをスローする
-		// $this->setExpectedException('\Bolster\BaseApi\BaseApiException');
-		// $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR]);
+		$this->setExpectedException('\Bolster\BaseApi\BaseApiException');
+		$request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR]);
 	}
 	function test_request_httpがNULLの状態でrequestをコールすると例外を発生する() {
 		$client  = new \Bolster\BaseApi\Client();
