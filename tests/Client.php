@@ -4,26 +4,45 @@ namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/Common.php';
 
-// 実際にはHTTP通信を行わずそのままレスポンスを返すHTTP通信のモック
+/**
+ * BASE APIクライアントに渡す、HTTP通信のモッククライアント。
+ * 
+ * 実際にはHTTP通信を行わず、与えられたURL(文字列)によりそのまま連想配列を返却する
+ */
 class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
 {
 	/**
+	 * 渡されたパラメータをそのまま返却する
 	 * @var string
 	 */
 	const PATH_ECHO = '/echo';
+
 	/**
-	 * @var string
-	 */
-	const PATH_ERROR = '/error';
-	/**
+	 * BASE APIから返ってくるアクセストークン切れエラーを模したレスポンスを返す
 	 * @var string
 	 */
 	const PATH_ERROR_ACCESS_TOKEN = '/error/access_token';
+
 	/**
+	 * BASE APIから返ってくるAPI使用回数制限エラーを模したレスポンスを返す
 	 * @var string
 	 */
 	const PATH_ERROR_RATE_LIMIT = '/error/rate_limit';
 
+	/**
+	 * BASE APIから返ってくるエラー(上記2つに当てはまらない)を模したレスポンスを返す
+	 * @var string
+	 */
+	const PATH_ERROR = '/error';
+
+	/**
+	 * HTTP通信を行わず、BASE APIのレスポンスを模した連想配列返す
+	 * 
+	 * @param string $method HTTPメソッド(使用しない)
+	 * @param string $url    リクエストによって振り分けるURL
+	 * @param array  $param  APIに渡されるパラメータ
+	 * @return array BASE APIからのレスポンスを模した連想配列
+	 */
 	private function request($method, $url, $params) {
 		if(strpos($url, self::PATH_ECHO) !== false) {
 			$response = $params;
@@ -47,21 +66,29 @@ class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
 		return $response;
 	}
 
+	// NOTE: abstract
 	public function get($url, array $params = array()) {
 		return $this->request('get', $url, $params);
 	}
+	// NOTE: abstract
 	public function post($url, array $params = array()) {
 		return $this->request('post', $url, $params);
 	}
+	// NOTE: abstract
 	public function put($url, array $params = array()) {
 		return $this->request('put', $url, $params);
 	}
+	// NOTE: abstract
 	public function delete($url, array $params = array()) {
 		return $this->request('delete', $url, $params);
 	}
+	// NOTE: abstract
 	public function setHeaders($key, $value) {}
 }
 
+/**
+ * BaseApi\Clientクラスのテスト
+ */
 class Client extends Common {
 	private $config = [
 		'client_id'     => CLIENT_ID,
