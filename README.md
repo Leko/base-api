@@ -1,4 +1,14 @@
 
+## install
+
+```json
+{
+	"require": {
+		"bolster/base-api": "dev-master"
+	}
+}
+```
+
 ## サンプル
 
 ### リダイレクト、コールバックのサンプル
