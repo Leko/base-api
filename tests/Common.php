@@ -55,6 +55,36 @@ abstract class Common extends \PHPUnit_Framework_TestCase {
         return $client;
     }
 
+    /**
+     * 全アイテムを削除する
+     * 
+     * @return void
+     */
+    protected function removeAllItems()
+    {
+        $items = $this->client->items()->all();
+        foreach($items['items'] as $item) {
+            $this->client->items()->delete([
+                'item_id' => $item['item_id'],
+            ]);
+        }
+    }
+
+    /**
+     * 全カテゴリを削除する
+     * 
+     * @return void
+     */
+    protected function removeAllCategories()
+    {
+        $categories = $this->client->categories()->all();
+        foreach($categories['categories'] as $category) {
+            $this->client->categories()->delete([
+                'category_id' => $category['category_id'],
+            ]);
+        }
+    }
+
     protected function getProperty($class, $property)
     {
         $class = new \ReflectionClass($class);
