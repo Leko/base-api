@@ -62,6 +62,8 @@ var_dump($me);
 // @param array $orders
 // @return void
 function dispatch_all(array $orders) {
+	global $client;
+
 	foreach($orders as $order) {
 		$detail = $client->orders()->detail($order['unique_key']);
 
