@@ -23,6 +23,8 @@ class Orders extends Client
 	/**
 	 * 注文情報の一覧を取得
 	 * 
+	 * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
+	 * 
 	 * GET /1/orders
 	 * @see https://gist.github.com/baseinc/9760824
 	 * 
@@ -33,7 +35,7 @@ class Orders extends Client
 	 *   @param int    offset        オフセット (任意 デフォルト: 0)
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function orders(array $params = array()) {
+	public function all(array $params = array()) {
 		return $this->request('get', '/1/orders', $params);
 	}
 
