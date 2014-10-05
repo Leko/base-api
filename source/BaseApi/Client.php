@@ -15,6 +15,48 @@ class Client
 	const TOKEN_TYPE = 'Bearer';
 
 	/**
+	 * スコープ：ユーザー情報を取得 (デフォルトで付与)
+	 * @var string
+	 */
+	const SCOPE_READ_USERS = 'read_users';
+
+	/**
+	 * スコープ：ユーザーのメールアドレスを取得
+	 * @var string
+	 */
+	const SCOPE_READ_USERS_MAIL = 'read_users_mail';
+
+	/**
+	 * スコープ：商品情報を取得
+	 * @var string
+	 */
+	const SCOPE_READ_ITEMS = 'read_items';
+
+	/**
+	 * スコープ：注文情報を取得
+	 * @var string
+	 */
+	const SCOPE_READ_ORDERS = 'read_orders';
+
+	/**
+	 * スコープ：引き出し申請情報を取得
+	 * @var string
+	 */
+	const SCOPE_READ_SAVINGS = 'read_savings';
+
+	/**
+	 * スコープ：商品情報を更新
+	 * @var string
+	 */
+	const SCOPE_WRITE_ITEMS = 'write_items';
+
+	/**
+	 * スコープ：注文情報を更新
+	 * @var string
+	 */
+	const SCOPE_WRITE_ORDERS = 'write_orders';
+
+	/**
 	 * アクセストークンの期限切れ時のエラーメッセージ
 	 * 
 	 * NOTE: エラーコードに統一性がないのでエラーメッセージで比較を行う
@@ -197,6 +239,10 @@ class Client
 	 */
 	protected function request($method, $path, array $params = array())
 	{
+		if(!($this->http instanceof HttpRequestable)) {
+			throw new \RuntimeException('httpクライアントが指定されていません');
+		}
+
 		$lower_method = strtolower($method);
 		$url          = $this->host.$path;
 

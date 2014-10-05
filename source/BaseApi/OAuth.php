@@ -67,9 +67,7 @@ class OAuth extends Client
 
 		// NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
 		$credentials = $this->request('post', '/1/oauth/token', $params);
-
-		$this->set('access_token', $credentials['access_token']);
-		$this->set('refresh_token', $credentials['refresh_token']);
+		$this->setCredential($credentials);
 
 		return $credentials;
 	}
@@ -96,10 +94,17 @@ class OAuth extends Client
 
 		// NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
 		$credentials = $this->request('post', '/1/oauth/token', $params);
-
-		$this->set('access_token', $credentials['access_token']);
-		$this->set('refresh_token', $credentials['refresh_token']);
+		$this->setCredential($credentials);
 
 		return $credentials;
+	}
+
+	/**
+	 * 取得した認証情報をプロパティにもセットする
+	 */
+	private function setCredential($credentials)
+	{
+		$this->setConfig('access_token', $credentials['access_token']);
+		$this->setConfig('refresh_token', $credentials['refresh_token']);
 	}
 }

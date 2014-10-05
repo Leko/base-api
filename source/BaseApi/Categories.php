@@ -11,13 +11,15 @@ class Categories extends Client
 	/**
 	 * カテゴリー情報の一覧を取得
 	 * 
+	 * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
+	 * 
 	 * GET /1/categories
 	 * @see https://gist.github.com/baseinc/a3cf5ecd760922534cab
 	 * 
 	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
 	 */
-	public function categories() {
-		return $this->request('get', '/1/categories', $params);
+	public function all() {
+		return $this->request('get', '/1/categories');
 	}
 
 	/**
