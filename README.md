@@ -23,7 +23,7 @@ $config = [
 	'redirect_uri'  => 'YOUR_REDIRECT_URI',
 	'scopes'        => ['read_orders', 'read_users'],
 ];
-$client = new \Base\Api\Client($config);
+$client = new \Bolster\BaseApi\Client($config);
 
 $state  = 'hogehoge';
 $client->oauth()->authorize($state);
@@ -43,7 +43,7 @@ $config = [
 	'redirect_uri'  => 'YOUR_REDIRECT_URI',
 	'scopes'        => ['read_orders', 'read_users'],
 ];
-$client = new \Base\Api\Client($config);
+$client = new \Bolster\BaseApi\Client($config);
 
 $credentials = $client->oauth()->getAccessToken($code);
 
@@ -85,7 +85,7 @@ $config = [
 
 	'access_token'  => $_SESSION['access_token'],
 ];
-$client = new \Base\Api\Client($config);
+$client = new \Bolster\BaseApi\Client($config);
 
 // NOTE: 60 * 60 * 24 * 7 = 1 week
 $orders = $client->orders()->all([
