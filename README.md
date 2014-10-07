@@ -1,6 +1,10 @@
 
 ## install
 
+add `bolster/base-api` to yout `composer.json`
+
+指定可能なバージョンは[releases](https://packagist.org/packages/bolster/base-api)を御覧下さい。
+
 ```json
 {
 	"require": {
@@ -10,6 +14,87 @@
 ```
 
 ## サンプル
+
+### インスタンス生成
+指定可能なオプションは、[こちら](https://github.com/Leko/base-api/blob/master/source/BaseApi/Client.php#L145)を御覧下さい。
+
+```
+<?php
+
+$config = [
+	'client_id'     => 'YOUR_CLIENT_ID',
+	'client_secret' => 'YOUR_CLIENT_SECRET',
+	'redirect_uri'  => 'YOUR_REDIRECT_URI',
+	'scopes'        => ['read_orders', 'read_users'],
+];
+
+$client = new \Bolster\BaseApi\Client($config);
+```
+
+---
+
+### 各種APIのクライアントを生成する
+
+各種APIのクライアントを生成するには`api名(小文字アンダーバーなし)`のメソッドが用意されているので、そちらをご利用下さい。  
+その先のメソッドは各ソースコードを御覧下さい。
+
+```php
+$client = new \Bolster\BaseApi\Client($config);
+
+// NOTE: 一度変数に取るとインスタンス生成のコストを削減できる
+$oauth_client  = $client->oauth();
+$aurhotize_url = $oauth_client->authorize();
+
+// NOTE: 一度にチェインで書くことも可能
+$aurhotize_url = $client->oauth()->authorize();
+
+// other methods
+// $client->users();
+// $client->items();
+// $client->categories();
+// $client->itemcategories();
+// $client->orders();
+// $client->savings();
+```
+
+---
+
+### 例外
+BASE APIからエラーのレスポンスが返ってきたら、それを例外としてスローします。
+
+特別にcatchするであろう例外を子クラスにして、より具体化しています。
+
+`ExpiredAccessTokenException`も`RateLimitExceedException`も`BaseApiException`を継承しているので、  
+両方ともcatchしたい場合には`BaseApiException`をキャッチすれば問題ありません。
+
+`ExpiredAccessTokenException`は、アクセストークンがセットされていない場合は発生しません。  
+アクセストークンがセットされており、なおかつ無効ですとレスポンスが返ってきた場合のみ発生します。
+
+```php
+<?php
+try {
+
+	$client->items()->delete(['item_id' => 100]);
+
+// アクセストークンの有効期限が切れた
+} catch(\Base\Api\ExpiredAccessTokenException $e) {
+	// アクセストークンをリフレッシュしてリトライ
+	$client->oauth()->refresh($_SESSION['refresh_token']);
+	$client->items()->delete(['item_id' => 100]);
+
+// 1日あたりのAPI使用回数制限に達した
+} catch(\Base\Api\RateLimitExceedException $e) {
+	// 1分待って再送信（NOTE: 日を跨ぐまで回数はリセットされないので実用例ではない）
+	sleep(60);
+	$client->items()->delete(['item_id' => 100]);
+
+// その他エラー
+} catch(\Base\Api\BaseApiException $e) {
+	var_dump($e);
+}
+```
+
+---
 
 ### リダイレクト、コールバックのサンプル
 
@@ -54,6 +139,8 @@ $client->setAccessToken($credentials['access_token']);
 $me = $client->users()->me();
 var_dump($me);
 ```
+
+---
 
 ### 取得、エラー制御
 ```php
@@ -103,7 +190,7 @@ try {
 }
 ```
 
-## 雑記
+## BASE APIの仕様雑記
 ### OAuth
 - `authorize`メソッドでscopeを何も設定せず(`&scope=`で終わった状態で)送信するとデフォルト権限になる
 
