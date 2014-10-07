@@ -4,7 +4,8 @@ namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/Common.php';
 
-class Orders extends Common {
+class Orders extends Common
+{
 	const DUMMY_UNIQUE_KEY = '864B7FC9E71CE416';
 
 	function test_all()
