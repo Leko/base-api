@@ -43,7 +43,7 @@ class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
 	 * @param array  $param  APIに渡されるパラメータ
 	 * @return array BASE APIからのレスポンスを模した連想配列
 	 */
-	private function request($method, $url, $params) {
+	public function request($method, $url, array $params = array()) {
 		if(strpos($url, self::PATH_ECHO) !== false) {
 			$response = $params;
 		} elseif(strpos($url, self::PATH_ERROR_ACCESS_TOKEN) !== false) {
@@ -66,23 +66,6 @@ class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
 		return $response;
 	}
 
-	// NOTE: abstract
-	public function get($url, array $params = array()) {
-		return $this->request('get', $url, $params);
-	}
-	// NOTE: abstract
-	public function post($url, array $params = array()) {
-		return $this->request('post', $url, $params);
-	}
-	// NOTE: abstract
-	public function put($url, array $params = array()) {
-		return $this->request('put', $url, $params);
-	}
-	// NOTE: abstract
-	public function delete($url, array $params = array()) {
-		return $this->request('delete', $url, $params);
-	}
-	// NOTE: abstract
 	public function setHeaders($key, $value) {}
 }
 

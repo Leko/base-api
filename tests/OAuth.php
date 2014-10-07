@@ -4,8 +4,6 @@ namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/Common.php';
 
-class MockHttpClient extends \Bolster\Http implements \Bolster\BaseApi\HttpRequestable {}
-
 class OAuth extends Common {
 	function test_authorize() {
 		$url = $this->client->oauth()->authorize();

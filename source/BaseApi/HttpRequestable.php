@@ -21,34 +21,16 @@ interface HttpRequestable
 	public function setHeaders($key, $value);
 
 	/**
-	 * GET通信を行う
+	 * HTTP通信を行う
 	 * 
+	 * 指定されたHTTPメソッドで通信を行わなければならない
+	 * 指定したURLにリクエストを行わなければならない
+	 * 指定されたパラメータを全て渡さなければならない
+	 * 
+	 * @param string $method リクエストを行うHTTPメソッド
 	 * @param string $url    リクエストを行うURL
 	 * @param array  $params URLへ渡すパラメータ
+	 * @return mixed $urlからのレスポンス
 	 */
-	public function get($url, array $params = array());
-
-	/**
-	 * POST通信を行う
-	 * 
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params URLへ渡すパラメータ
-	 */
-	public function post($url, array $params = array());
-
-	/**
-	 * PUT通信を行う
-	 * 
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params URLへ渡すパラメータ
-	 */
-	public function put($url, array $params = array());
-
-	/**
-	 * DELETE通信を行う
-	 * 
-	 * @param string $url    リクエストを行うURL
-	 * @param array  $params URLへ渡すパラメータ
-	 */
-	public function delete($url, array $params = array());
+	public function request($method, $url, array $params = array());
 }

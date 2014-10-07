@@ -249,7 +249,7 @@ class Client
 		// アクセストークンをヘッダにセットする
 		$this->http->setHeaders('Authorization', self::TOKEN_TYPE.' '.$this->access_token);
 
-		$response = $this->http->{$lower_method}($url, $params);
+		$response = $this->http->request($lower_method, $url, $params);
 
 		if(isset($response['error'])) {
 			$this->errorHandle($response['error'], $response['error_description']);

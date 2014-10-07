@@ -16,6 +16,8 @@ require_once __DIR__.'/../source/BaseApi/BaseApiException.php';
 require_once __DIR__.'/../source/BaseApi/ExpiredAccessTokenException.php';
 require_once __DIR__.'/../source/BaseApi/RateLimitExceedException.php';
 
+class BaseApiHttp extends \Bolster\Http implements \Bolster\BaseApi\HttpRequestable {}
+
 abstract class Common extends \PHPUnit_Framework_TestCase {
     protected $client;
 
@@ -48,7 +50,7 @@ abstract class Common extends \PHPUnit_Framework_TestCase {
             ]
         ]);
 
-        $mock = new MockHttpClient();
+        $mock = new BaseApiHttp();
         $mock->setParser(new \Bolster\Http\Parser\JsonParser());
 
         $client->setHttpClient($mock);
