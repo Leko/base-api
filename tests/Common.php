@@ -18,7 +18,8 @@ require_once __DIR__.'/../source/BaseApi/RateLimitExceedException.php';
 
 class BaseApiHttp extends \Bolster\Http implements \Bolster\BaseApi\HttpRequestable {}
 
-abstract class Common extends \PHPUnit_Framework_TestCase {
+abstract class Common extends \PHPUnit_Framework_TestCase
+{
     protected $client;
 
     public function setUp()
