@@ -10,11 +10,11 @@
 	verbose="true">
 
 	<php>
-		<const name="CLIENT_ID" value="YOUR_CLIENT_ID" />
-		<const name="CLIENT_SECRET" value="YOUR_CLIENT_SECRET" />
-		<const name="REDIRECT_URI" value="YOUR_REDIRECT_URI" />
-		<const name="ACCESS_TOKEN" value="YOUR_ACCESS_TOKEN" />
-		<const name="REFRESH_TOKEN" value="YOUR_REFRESH_TOKEN" />
+		<const name="CLIENT_ID" value="c9fb4462d22134d84ccc680357b98d94" />
+		<const name="CLIENT_SECRET" value="73866a7f2b7f3ccd85f805b276793e56" />
+		<const name="REDIRECT_URI" value="http://127.0.0.1:9999/callback.php" />
+		<const name="ACCESS_TOKEN" value="b4c6e623c58cf92eef13eed95d93fdfe" />
+		<const name="REFRESH_TOKEN" value="2caf183d88140d75423391ec52bc5f30" />
 	</php>
 
 	<testsuites>

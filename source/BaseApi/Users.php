@@ -8,15 +8,16 @@ namespace Bolster\BaseApi;
  */
 class Users extends Client
 {
-	/**
-	 * ユーザー情報を取得
-	 * 
-	 * GET /1/users/me
-	 * @see https://gist.github.com/baseinc/9759577
-	 * 
-	 * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
-	 */
-	public function me() {
-		return $this->request('get', '/1/users/me');
-	}
+    /**
+     * ユーザー情報を取得
+     * 
+     * GET /1/users/me
+     * @see https://gist.github.com/baseinc/9759577
+     * 
+     * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
+     */
+    public function me()
+    {
+        return $this->request('get', '/1/users/me');
+    }
 }

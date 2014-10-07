@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Leko/http.git",
-                "reference": "3c10da499e0f5b085dde45ff92b1e87141ab88af"
+                "reference": "cd9129ab5cd4c46dc83dfc6200bbb959b6741a8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Leko/http/zipball/3c10da499e0f5b085dde45ff92b1e87141ab88af",
-                "reference": "3c10da499e0f5b085dde45ff92b1e87141ab88af",
+                "url": "https://api.github.com/repos/Leko/http/zipball/cd9129ab5cd4c46dc83dfc6200bbb959b6741a8a",
+                "reference": "cd9129ab5cd4c46dc83dfc6200bbb959b6741a8a",
                 "shasum": ""
             },
             "require-dev": {
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Http wrapper",
-            "time": "2014-10-07 06:04:34"
+            "time": "2014-10-07 06:13:56"
         },
         {
             "name": "doctrine/instantiator",
