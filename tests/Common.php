@@ -3,18 +3,19 @@
 namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../source/BaseApi/Client.php';
-require_once __DIR__.'/../source/BaseApi/OAuth.php';
-require_once __DIR__.'/../source/BaseApi/Users.php';
-require_once __DIR__.'/../source/BaseApi/Items.php';
-require_once __DIR__.'/../source/BaseApi/Categories.php';
-require_once __DIR__.'/../source/BaseApi/ItemCategories.php';
-require_once __DIR__.'/../source/BaseApi/Orders.php';
-require_once __DIR__.'/../source/BaseApi/Savings.php';
-require_once __DIR__.'/../source/BaseApi/HttpRequestable.php';
-require_once __DIR__.'/../source/BaseApi/BaseApiException.php';
-require_once __DIR__.'/../source/BaseApi/ExpiredAccessTokenException.php';
-require_once __DIR__.'/../source/BaseApi/RateLimitExceedException.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Client.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/ApiAbstract.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/OAuth.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Users.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Items.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Categories.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/ItemCategories.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Orders.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/Savings.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/HttpRequestable.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/BaseApiException.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/ExpiredAccessTokenException.php';
+require_once __DIR__.'/../source/Bolster/BaseApi/RateLimitExceedException.php';
 
 class BaseApiHttp extends \Bolster\Http implements \Bolster\BaseApi\HttpRequestable {}
 

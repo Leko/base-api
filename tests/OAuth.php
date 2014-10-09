@@ -12,6 +12,8 @@ class OAuth extends Common
         $parsed = parse_url($url);
         parse_str($parsed['query'], $query);
 
+        var_dump($url);
+
         $this->assertEquals('https', $parsed['scheme'], 'URLのプロトコルはhttps');
         $this->assertEquals('api.thebase.in', $parsed['host'], 'URLのホストはapi_thebase_in');
         $this->assertArrayHasKey('response_type', $query, 'URLにresponse_typeが含まれている');
@@ -23,13 +25,13 @@ class OAuth extends Common
     {
         $oauth_client = $this->client->oauth();
 
-        $before_access_token  = $oauth_client->getConfig('access_token');
-        $before_refresh_token = $oauth_client->getConfig('refresh_token');
+        $before_access_token  = $this->client->getConfig('access_token');
+        $before_refresh_token = $this->client->getConfig('refresh_token');
 
         $credentials = $oauth_client->refresh();
 
-        $after_access_token  = $oauth_client->getConfig('access_token');
-        $after_refresh_token = $oauth_client->getConfig('refresh_token');
+        $after_access_token  = $this->client->getConfig('access_token');
+        $after_refresh_token = $this->client->getConfig('refresh_token');
 
         $this->assertArrayHasKey('access_token', $credentials, 'アクセストークンが返却される');
         $this->assertArrayHasKey('refresh_token', $credentials, 'リフレッシュトークンが返却される');
