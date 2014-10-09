@@ -43,7 +43,7 @@ class OAuth extends ApiAbstract
         $params['redirect_uri']  = $this->client->getConfig('redirect_uri');
         $params['scope']         = implode(' ', $this->client->getConfig('scopes'));
 
-        $url = $this->client->host.'/1/oauth/authorize?'.http_build_query($params);
+        $url = $this->client->getConfig('host').'/1/oauth/authorize?'.http_build_query($params);
         return $url;
     }
 

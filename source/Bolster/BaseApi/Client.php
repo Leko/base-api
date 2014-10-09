@@ -100,7 +100,7 @@ class Client
      * 
      * @var string
      */
-    public $host = 'https://api.thebase.in';
+    protected $host = 'https://api.thebase.in';
 
     /**
      * BASE APIで利用するクライアントID
@@ -143,6 +143,7 @@ class Client
      * @var string
      */
     protected $editable_properties = [
+        'host',
         'client_id',
         'client_secret',
         'redirect_uri',
