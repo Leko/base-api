@@ -307,9 +307,8 @@ class Client
             throw new \LogicException('存在しないクラス名が指定されています：'.$name);
         }
 
-        $instance = new $client_class($this->getConfig());
-        $instance->setHttpClient($this->http);
-
+        // $thisを渡し各APIでのリクエスト処理を自分自身に移譲させる
+        $instance = new $client_class($this);
         return $instance;
     }
 
