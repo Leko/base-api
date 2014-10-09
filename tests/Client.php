@@ -164,55 +164,41 @@ class Client extends Common
     {
         $instance = $this->client->oauth();
         $this->assertInstanceOf('\Bolster\BaseApi\OAuth', $instance, '戻り値はOAuthのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_users()
     {
         $instance = $this->client->users();
         $this->assertInstanceOf('\Bolster\BaseApi\Users', $instance, '戻り値はUsersのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_items()
     {
         $instance = $this->client->items();
         $this->assertInstanceOf('\Bolster\BaseApi\Items', $instance, '戻り値はItemsのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_categories()
     {
         $instance = $this->client->categories();
         $this->assertInstanceOf('\Bolster\BaseApi\Categories', $instance, '戻り値はCategoriesのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_itemcategories()
     {
         $instance = $this->client->itemcategories();
         $this->assertInstanceOf('\Bolster\BaseApi\ItemCategories', $instance, '戻り値はItemCategoriesのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_orders()
     {
         $instance = $this->client->orders();
         $this->assertInstanceOf('\Bolster\BaseApi\Orders', $instance, '戻り値はOrdersのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 
     function test_savings()
     {
         $instance = $this->client->savings();
         $this->assertInstanceOf('\Bolster\BaseApi\Savings', $instance, '戻り値はSavingsのインスタンス');
-
-        $this->assertEquals($this->client->getConfig(), $instance->getConfig(), 'インスタンスにclientの設定が引き継がれている');
     }
 }

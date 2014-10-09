@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * Orders APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class Orders extends Client
+class Orders extends ApiAbstract
 {
     /**
      * ステータス：配送済み
@@ -37,7 +37,7 @@ class Orders extends Client
      */
     public function all(array $params = array())
     {
-        return $this->request('get', '/1/orders', $params);
+        return $this->client->request('get', '/1/orders', $params);
     }
 
     /**
@@ -51,7 +51,7 @@ class Orders extends Client
      */
     public function detail($unique_key)
     {
-        return $this->request('get', '/1/orders/detail/'.$unique_key);
+        return $this->client->request('get', '/1/orders/detail/'.$unique_key);
     }
 
     /**
@@ -68,6 +68,6 @@ class Orders extends Client
      */
     public function edit_status(array $params = array())
     {
-        return $this->request('post', '/1/orders/edit_status', $params);
+        return $this->client->request('post', '/1/orders/edit_status', $params);
     }
 }

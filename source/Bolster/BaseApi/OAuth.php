@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * OAuth APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class OAuth extends Client
+class OAuth extends ApiAbstract
 {
     /**
      * authorizeで使用するレスポンスの形式
@@ -39,11 +39,11 @@ class OAuth extends Client
     public function authorize(array $params = array())
     {
         $params['response_type'] = self::RESPONSE_TYPE_CODE;
-        $params['client_id']     = $this->client_id;
-        $params['redirect_uri']  = $this->redirect_uri;
-        $params['scope']         = implode(' ', $this->scopes);
+        $params['client_id']     = $this->client->getConfig('client_id');
+        $params['redirect_uri']  = $this->client->getConfig('redirect_uri');
+        $params['scope']         = implode(' ', $this->client->getConfig('scopes'));
 
-        $url = $this->host.'/1/oauth/authorize?'.http_build_query($params);
+        $url = $this->client->getConfig('host').'/1/oauth/authorize?'.http_build_query($params);
         return $url;
     }
 
@@ -63,12 +63,12 @@ class OAuth extends Client
     public function token(array $params = array())
     {
         $params['grant_type']    = self::GRANT_TYPE_AUTHORIZATION_CODE;
-        $params['client_id']     = $this->client_id;
-        $params['client_secret'] = $this->client_secret;
-        $params['redirect_uri']  = $this->redirect_uri;
+        $params['client_id']     = $this->client->getConfig('client_id');
+        $params['client_secret'] = $this->client->getConfig('client_secret');
+        $params['redirect_uri']  = $this->client->getConfig('redirect_uri');
 
         // NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
-        $credentials = $this->request('post', '/1/oauth/token', $params);
+        $credentials = $this->client->request('post', '/1/oauth/token', $params);
         $this->setCredential($credentials);
 
         return $credentials;
@@ -90,13 +90,13 @@ class OAuth extends Client
     public function refresh()
     {
         $params['grant_type']    = self::GRANT_TYPE_REFRESH_TOKEN;
-        $params['client_id']     = $this->client_id;
-        $params['client_secret'] = $this->client_secret;
-        $params['redirect_uri']  = $this->redirect_uri;
-        $params['refresh_token'] = $this->refresh_token;
+        $params['client_id']     = $this->client->getConfig('client_id');
+        $params['client_secret'] = $this->client->getConfig('client_secret');
+        $params['redirect_uri']  = $this->client->getConfig('redirect_uri');
+        $params['refresh_token'] = $this->client->getConfig('refresh_token');
 
         // NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
-        $credentials = $this->request('post', '/1/oauth/token', $params);
+        $credentials = $this->client->request('post', '/1/oauth/token', $params);
         $this->setCredential($credentials);
 
         return $credentials;
@@ -107,7 +107,7 @@ class OAuth extends Client
      */
     private function setCredential($credentials)
     {
-        $this->setConfig('access_token', $credentials['access_token']);
-        $this->setConfig('refresh_token', $credentials['refresh_token']);
+        $this->client->setConfig('access_token', $credentials['access_token']);
+        $this->client->setConfig('refresh_token', $credentials['refresh_token']);
     }
 }

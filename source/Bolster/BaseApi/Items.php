@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * Items APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class Items extends Client
+class Items extends ApiAbstract
 {
     /**
      * 並び順の条件：指定した並び順順
@@ -49,7 +49,7 @@ class Items extends Client
      */
     public function all(array $params = array())
     {
-        return $this->request('get', '/1/items', $params);
+        return $this->client->request('get', '/1/items', $params);
     }
 
     /**
@@ -63,7 +63,7 @@ class Items extends Client
      */
     public function detail($item_id)
     {
-        return $this->request('get', '/1/items/detail/'.$item_id);
+        return $this->client->request('get', '/1/items/detail/'.$item_id);
     }
 
     /**
@@ -87,7 +87,7 @@ class Items extends Client
      */
     public function add(array $params = array())
     {
-        return $this->request('post', '/1/items/add', $params);
+        return $this->client->request('post', '/1/items/add', $params);
     }
 
     /**
@@ -113,7 +113,7 @@ class Items extends Client
      */
     public function edit(array $params = array())
     {
-        return $this->request('post', '/1/items/edit', $params);
+        return $this->client->request('post', '/1/items/edit', $params);
     }
 
     /**
@@ -128,7 +128,7 @@ class Items extends Client
      */
     public function delete(array $params = array())
     {
-        return $this->request('post', '/1/items/delete', $params);
+        return $this->client->request('post', '/1/items/delete', $params);
     }
 
     /**
@@ -145,7 +145,7 @@ class Items extends Client
      */
     public function add_image(array $params = array())
     {
-        return $this->request('post', '/1/items/add_image', $params);
+        return $this->client->request('post', '/1/items/add_image', $params);
     }
 
     /**
@@ -161,7 +161,7 @@ class Items extends Client
      */
     public function delete_image(array $params = array())
     {
-        return $this->request('post', '/1/items/delete_image', $params);
+        return $this->client->request('post', '/1/items/delete_image', $params);
     }
 
     /**
@@ -179,6 +179,6 @@ class Items extends Client
      */
     public function edit_stock(array $params = array())
     {
-        return $this->request('post', '/1/items/edit_stock', $params);
+        return $this->client->request('post', '/1/items/edit_stock', $params);
     }
 }

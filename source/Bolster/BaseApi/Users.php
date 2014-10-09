@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * Users APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class Users extends Client
+class Users extends ApiAbstract
 {
     /**
      * ユーザー情報を取得
@@ -18,6 +18,6 @@ class Users extends Client
      */
     public function me()
     {
-        return $this->request('get', '/1/users/me');
+        return $this->client->request('get', '/1/users/me');
     }
 }

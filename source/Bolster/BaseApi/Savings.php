@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * Savings APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class Savings extends Client
+class Savings extends ApiAbstract
 {
     /**
      * 引き出し申請情報の一覧を取得
@@ -25,6 +25,6 @@ class Savings extends Client
      */
     public function all(array $params = array())
     {
-        return $this->request('get', '/1/savings', $params);
+        return $this->client->request('get', '/1/savings', $params);
     }
 }

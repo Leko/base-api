@@ -143,6 +143,7 @@ class Client
      * @var string
      */
     protected $editable_properties = [
+        'host',
         'client_id',
         'client_secret',
         'redirect_uri',
@@ -238,7 +239,7 @@ class Client
      * @return array レスポンスをJSON形式でパースした結果の連想配列
      * @throws BaseApiException 詳細はerrorHandleメソッドを参照
      */
-    protected function request($method, $path, array $params = array())
+    public function request($method, $path, array $params = array())
     {
         if(!($this->http instanceof HttpRequestable)) {
             throw new \RuntimeException('httpクライアントが指定されていません');
@@ -307,9 +308,8 @@ class Client
             throw new \LogicException('存在しないクラス名が指定されています：'.$name);
         }
 
-        $instance = new $client_class($this->getConfig());
-        $instance->setHttpClient($this->http);
-
+        // $thisを渡し各APIでのリクエスト処理を自分自身に移譲させる
+        $instance = new $client_class($this);
         return $instance;
     }
 
