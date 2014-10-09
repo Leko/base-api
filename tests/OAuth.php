@@ -12,8 +12,6 @@ class OAuth extends Common
         $parsed = parse_url($url);
         parse_str($parsed['query'], $query);
 
-        var_dump($url);
-
         $this->assertEquals('https', $parsed['scheme'], 'URLのプロトコルはhttps');
         $this->assertEquals('api.thebase.in', $parsed['host'], 'URLのホストはapi_thebase_in');
         $this->assertArrayHasKey('response_type', $query, 'URLにresponse_typeが含まれている');
