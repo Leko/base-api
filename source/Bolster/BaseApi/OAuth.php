@@ -39,9 +39,9 @@ class OAuth extends ApiAbstract
     public function authorize(array $params = array())
     {
         $params['response_type'] = self::RESPONSE_TYPE_CODE;
-        $params['client_id']     = $this->client_id;
-        $params['redirect_uri']  = $this->redirect_uri;
-        $params['scope']         = implode(' ', $this->scopes);
+        $params['client_id']     = $this->client->getConfig('client_id');
+        $params['redirect_uri']  = $this->client->getConfig('redirect_uri');
+        $params['scope']         = implode(' ', $this->client->getConfig('scopes'));
 
         $url = $this->client->host.'/1/oauth/authorize?'.http_build_query($params);
         return $url;

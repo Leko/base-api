@@ -100,7 +100,7 @@ class Client
      * 
      * @var string
      */
-    protected $host = 'https://api.thebase.in';
+    public $host = 'https://api.thebase.in';
 
     /**
      * BASE APIで利用するクライアントID
