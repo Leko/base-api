@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * ItemCategories APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class ItemCategories extends Client
+class ItemCategories extends ApiAbstract
 {
     /**
      * 商品のカテゴリー情報を取得
@@ -19,7 +19,7 @@ class ItemCategories extends Client
      */
     public function detail($item_id)
     {
-        return $this->request('get', '/1/item_categories/detail/'.$item_id);
+        return $this->client->request('get', '/1/item_categories/detail/'.$item_id);
     }
 
     /**
@@ -35,7 +35,7 @@ class ItemCategories extends Client
      */
     public function add(array $params = array())
     {
-        return $this->request('post', '/1/item_categories/add', $params);
+        return $this->client->request('post', '/1/item_categories/add', $params);
     }
 
     /**
@@ -50,6 +50,6 @@ class ItemCategories extends Client
      */
     public function delete(array $params = array())
     {
-        return $this->request('post', '/1/item_categories/delete', $params);
+        return $this->client->request('post', '/1/item_categories/delete', $params);
     }
 }

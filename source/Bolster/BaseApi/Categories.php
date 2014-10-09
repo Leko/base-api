@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * Categories APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class Categories extends Client
+class Categories extends ApiAbstract
 {
     /**
      * カテゴリー情報の一覧を取得
@@ -20,7 +20,7 @@ class Categories extends Client
      */
     public function all()
     {
-        return $this->request('get', '/1/categories');
+        return $this->client->request('get', '/1/categories');
     }
 
     /**
@@ -36,7 +36,7 @@ class Categories extends Client
      */
     public function add(array $params = array())
     {
-        return $this->request('post', '/1/categories/add', $params);
+        return $this->client->request('post', '/1/categories/add', $params);
     }
 
     /**
@@ -53,7 +53,7 @@ class Categories extends Client
      */
     public function edit(array $params = array())
     {
-        return $this->request('post', '/1/categories/edit', $params);
+        return $this->client->request('post', '/1/categories/edit', $params);
     }
 
     /**
@@ -68,6 +68,6 @@ class Categories extends Client
      */
     public function delete(array $params = array())
     {
-        return $this->request('post', '/1/categories/delete', $params);
+        return $this->client->request('post', '/1/categories/delete', $params);
     }
 }

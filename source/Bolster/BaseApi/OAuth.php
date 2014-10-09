@@ -6,7 +6,7 @@ namespace Bolster\BaseApi;
  * OAuth APIのクライアントとなるクラス
  * @author Leko <leko.noor@gmail.com>
  */
-class OAuth extends Client
+class OAuth extends ApiAbstract
 {
     /**
      * authorizeで使用するレスポンスの形式
@@ -43,7 +43,7 @@ class OAuth extends Client
         $params['redirect_uri']  = $this->redirect_uri;
         $params['scope']         = implode(' ', $this->scopes);
 
-        $url = $this->host.'/1/oauth/authorize?'.http_build_query($params);
+        $url = $this->client->host.'/1/oauth/authorize?'.http_build_query($params);
         return $url;
     }
 
@@ -68,7 +68,7 @@ class OAuth extends Client
         $params['redirect_uri']  = $this->redirect_uri;
 
         // NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
-        $credentials = $this->request('post', '/1/oauth/token', $params);
+        $credentials = $this->client->request('post', '/1/oauth/token', $params);
         $this->setCredential($credentials);
 
         return $credentials;
@@ -96,7 +96,7 @@ class OAuth extends Client
         $params['refresh_token'] = $this->refresh_token;
 
         // NOTE: レスポンスを受け取ったらクライアントの認証情報もリセットする
-        $credentials = $this->request('post', '/1/oauth/token', $params);
+        $credentials = $this->client->request('post', '/1/oauth/token', $params);
         $this->setCredential($credentials);
 
         return $credentials;
