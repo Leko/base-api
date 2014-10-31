@@ -181,4 +181,20 @@ class Items extends ApiAbstract
     {
         return $this->client->request('post', '/1/items/edit_stock', $params);
     }
+
+    /**
+     * 商品情報のバリエーションを削除
+     * 
+     * POST /1/items/delete_variation
+     * @see https://gist.github.com/baseinc/7ecebf95aae012197738
+     * 
+     * @param array $params 指定可能なオプションは以下を参照
+     *   @param int item_id      商品ID (必須)
+     *   @param int variation_id バリエーションID (必須)
+     * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
+     */
+    public function delete_variation(array $params = array())
+    {
+        return $this->client->request('post', '/1/items/delete_variation', $params);
+    }
 }
