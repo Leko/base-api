@@ -1,0 +1,13 @@
+language: php
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+env:
+  global:
+    secure: "D6neJ7Mnrx/F0OFHlfwqFqvdjhWQxf/k9Jb0x1JWb4qQG9dj5OO1e+dUrgrQGWi1VAOhLlmphxnSKqk9gHXYBlPk7vCI6+9PQYz5q61fl78tbyW3R8LZ3u2j3wcmlMBSRU+qJ8X4jcy93uHZ/gMOgQN7ieNDg+pgMekCk5JkLzY="
+before_script:
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
+script: phpunit -c tests/phpunit.xml --coverage-text
