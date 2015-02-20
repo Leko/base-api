@@ -91,9 +91,13 @@ class Client extends Common
         'client_secret' => CLIENT_SECRET,
         'redirect_uri'  => REDIRECT_URI,
         'scopes'        => ['hoge', 'foo', 'bar'],
-        'access_token'  => ACCESS_TOKEN,
-        'refresh_token' => REFRESH_TOKEN,
     ];
+
+    public function __construct()
+    {
+        $this->config['access_token']  = getenv('BASE_ACCESS_TOKEN');
+        $this->config['refresh_token'] = getenv('BASE_REFRESH_TOKEN');
+    }
 
     function test___construct()
     {
