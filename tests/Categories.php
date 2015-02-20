@@ -29,6 +29,7 @@ class Categories extends Common {
 
     function test_add()
     {
+        $this->setExpectedException('Bolster\BaseApi\BaseApiException');
         $response = $this->client->categories()->add([
             'name' => '256ああああああああああああああああああああああああああああ',
             'list_order' => 1000001

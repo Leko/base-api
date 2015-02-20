@@ -6,8 +6,6 @@ require_once __DIR__.'/Common.php';
 
 class Orders extends Common
 {
-	const DUMMY_UNIQUE_KEY = '864B7FC9E71CE416';
-
 	function test_all()
 	{
 		$response = $this->client->orders()->all();
@@ -16,7 +14,8 @@ class Orders extends Common
 
 	function test_detail()
 	{
-		$response = $this->client->orders()->detail(self::DUMMY_UNIQUE_KEY);
+        $orders = $this->client->orders()->all();
+		$response = $this->client->orders()->detail($orders['orders'][0]['unique_key']);
 		$this->assertTrue(is_array($response), 'APIを実行できる');
 	}
 
