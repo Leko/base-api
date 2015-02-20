@@ -6,8 +6,8 @@ php:
   - hhvm
 env:
   global:
-    secure: "D6neJ7Mnrx/F0OFHlfwqFqvdjhWQxf/k9Jb0x1JWb4qQG9dj5OO1e+dUrgrQGWi1VAOhLlmphxnSKqk9gHXYBlPk7vCI6+9PQYz5q61fl78tbyW3R8LZ3u2j3wcmlMBSRU+qJ8X4jcy93uHZ/gMOgQN7ieNDg+pgMekCk5JkLzY="
+    secure: "ahUDOW+/fhjAq7OgcTRMxHxRdoXM4vfdnIWhMTQNdO6NG7ryZ+6m3VNH89RX/1WEo+7wCPLglh3nnYapdD+/jWJ4a5ZX+/GINbsuTUUqrwhQ+dhJOEwmI478iEhZ03INGDSj8kaeTW9DgIBMOxJdPmOLzWjnetcodSg1Jcg2nm4="
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
-script: phpunit -c tests/phpunit.xml --coverage-text
+script: ./vendor/bin/phpunit -c tests/phpunit.xml
