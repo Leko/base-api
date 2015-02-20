@@ -6,7 +6,7 @@ php:
   - hhvm
 env:
   global:
-    secure: "ahUDOW+/fhjAq7OgcTRMxHxRdoXM4vfdnIWhMTQNdO6NG7ryZ+6m3VNH89RX/1WEo+7wCPLglh3nnYapdD+/jWJ4a5ZX+/GINbsuTUUqrwhQ+dhJOEwmI478iEhZ03INGDSj8kaeTW9DgIBMOxJdPmOLzWjnetcodSg1Jcg2nm4="
+    secure: "Ce8Z2qF2zqC+O6/Ii8HZdxnVBtTYC/QEb31cridxHy58D84sn2yCupKMlDF4tr7j8QCLlSfVzW7w9YfsEXkRRgVslQSdDS1ciraTJhHee7wRb3yuXpagPMSrapMyzcn7iR+JQ+TQZjC7gh88gW8qK3BleuYT+FFF7MZHtJTb7cY="
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
