@@ -18,7 +18,7 @@ add `bolster/base-api` to yout `composer.json`
 ### インスタンス生成
 指定可能なオプションは、[こちら](https://github.com/Leko/base-api/blob/master/source/BaseApi/Client.php#L145)を御覧下さい。
 
-```
+```php
 <?php
 
 $config = [
@@ -82,7 +82,7 @@ try {
 	$client->oauth()->refresh($_SESSION['refresh_token']);
 	$client->items()->delete(['item_id' => 100]);
 
-// 1日あたりのAPI使用回数制限に達した
+// 1日もしくは1時間あたりのAPI使用回数制限に達した
 } catch(\Base\Api\RateLimitExceedException $e) {
 	// 1分待って再送信（NOTE: 日を跨ぐまで回数はリセットされないので実用例ではない）
 	sleep(60);
