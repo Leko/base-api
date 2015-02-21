@@ -13,8 +13,6 @@
 		<const name="CLIENT_ID" value="c9fb4462d22134d84ccc680357b98d94" />
 		<const name="CLIENT_SECRET" value="73866a7f2b7f3ccd85f805b276793e56" />
 		<const name="REDIRECT_URI" value="http://127.0.0.1:9999/callback.php" />
-		<const name="ACCESS_TOKEN" value="56cd090abe39774e6aba1b39798e2e7c" />
-		<const name="REFRESH_TOKEN" value="99b6ead575eeb292633f869a9589dd90" />
 	</php>
 
 	<testsuites>

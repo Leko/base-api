@@ -4,14 +4,15 @@ namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/Common.php';
 
+use Bolster\BaseApi\BaseApiException;
+
 class Items extends Common
 {
     protected $dummyItem;
 
-    public function setUP()
+    public function setUp()
     {
         parent::setUp();
-        $this->removeAllItems();
 
         $item = $this->client->items()->add([
             'title'  => 'dummy_item01',

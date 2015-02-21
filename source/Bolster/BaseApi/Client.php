@@ -67,14 +67,18 @@ class Client
     const ERROR_EXPIRED_ACCESS_TOKEN = 'アクセストークンが無効です。';
 
     /**
-     * API回数制限と超えた時のエラーメッセージ
-     * 
-     * NOTE: エラーコードに統一性がないのでエラーメッセージで比較を行う
-     * FIXME: 些細な仕様変更に弱い
+     * 1日のAPI回数制限と超えた時のエラーコード
      * 
      * @var string
      */
-    const ERROR_RATE_LIMIT_EXCEED = '1日のAPIの利用上限を超えました。日付が変わってからもう一度アクセスしてください。';
+    const ERROR_RATE_LIMIT_EXCEED = 'day_api_limit';
+
+    /**
+     * 1時間のAPI回数制限と超えた時のエラーコード
+     * 
+     * @var string
+     */
+    const ERROR_HOUR_RATE_LIMIT_EXCEED = 'hour_api_limit';
 
     /**
      * date関数で使用できるフォーマット(yyyy-mm-dd形式)
@@ -280,7 +284,10 @@ class Client
         if(!is_null($this->access_token) && $error_description === self::ERROR_EXPIRED_ACCESS_TOKEN) {
             $exception_class = 'ExpiredAccessTokenException';
 
-        } elseif($error_description === self::ERROR_RATE_LIMIT_EXCEED) {
+        } elseif($error === self::ERROR_RATE_LIMIT_EXCEED) {
+            $exception_class = 'RateLimitExceedException';
+
+        } elseif($error === self::ERROR_HOUR_RATE_LIMIT_EXCEED) {
             $exception_class = 'RateLimitExceedException';
 
         } else {

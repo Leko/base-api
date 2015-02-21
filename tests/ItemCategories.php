@@ -6,14 +6,15 @@ require_once __DIR__.'/Common.php';
 
 class ItemCategories extends Common
 {
+    protected $dummyItem;
+    protected $dummyCategory;
     protected $dummyItemCategory;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->removeAllItems();
-        $this->removeAllCategories();
+        $category_name = mb_substr(uniqid('dummy_category', true), 0, 30);
 
         // itemとcategoryを追加
         $item = $this->client->items()->add([
@@ -21,13 +22,26 @@ class ItemCategories extends Common
             'price'  => 100,
             'stock'  => 50,
         ]);
-        $category = $this->client->categories()->add([
-            'name' => 'dummy_category01'
+        $categories = $this->client->categories()->add([
+            'name' => $category_name,
         ]);
 
+        $this->dummyItem = $item['item'];
+        foreach($categories['categories'] as $category) {
+            if($category['name'] === $category_name) {
+                $this->dummyCategory = $category;
+            }
+        }
+
         // それらを紐付け
-        $item_category = $this->createItemCategories($item['item']['item_id'], $category['categories'][0]['category_id']);
+        $item_category = $this->createItemCategories($this->dummyItem['item_id'], $this->dummyCategory['category_id']);
         $this->dummyItemCategory = $item_category['item_categories'][0];
+    }
+    public function teardown()
+    {
+        $this->client->categories()->delete([
+            'category_id' => $this->dummyCategory['category_id']
+        ]);
     }
 
     /**
@@ -47,7 +61,7 @@ class ItemCategories extends Common
 
     function test_detail()
     {
-        $response = $this->client->itemcategories()->detail($this->dummyItemCategory['item_id']);
+        $response = $this->client->itemcategories()->detail($this->dummyItem['item_id']);
         $this->assertTrue(is_array($response), 'APIが実行できる');
     }
 

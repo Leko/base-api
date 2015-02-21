@@ -30,6 +30,12 @@ class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
     const PATH_ERROR_RATE_LIMIT = '/error/rate_limit';
 
     /**
+     * BASE APIから返ってくるAPI使用回数制限エラーを模したレスポンスを返す
+     * @var string
+     */
+    const PATH_ERROR_HOUR_RATE_LIMIT = '/error/hour_rate_limit';
+
+    /**
      * BASE APIから返ってくるエラー(上記2つに当てはまらない)を模したレスポンスを返す
      * @var string
      */
@@ -54,8 +60,13 @@ class MockHttpRequester implements \Bolster\BaseApi\HttpRequestable
             ];
         } elseif(strpos($url, self::PATH_ERROR_RATE_LIMIT) !== false) {
             $response = [
-                'error' => 'temporarily_unavailable',
-                'error_description' => \Bolster\BaseApi\Client::ERROR_RATE_LIMIT_EXCEED,
+                'error' => 'hour_api_limit',
+                'error_description' => '1日のAPIの利用上限を超えました。日付が変わってからもう一度アクセスしてください。',
+            ];
+        } elseif(strpos($url, self::PATH_ERROR_HOUR_RATE_LIMIT) !== false) {
+            $response = [
+                'error' => 'day_api_limit',
+                'error_description' => '1時間のAPIの利用上限を超えました。時間が変わってからもう一度アクセスしてください。',
             ];
         } elseif(strpos($url, self::PATH_ERROR) !== false) {
             $response = [
@@ -80,9 +91,13 @@ class Client extends Common
         'client_secret' => CLIENT_SECRET,
         'redirect_uri'  => REDIRECT_URI,
         'scopes'        => ['hoge', 'foo', 'bar'],
-        'access_token'  => ACCESS_TOKEN,
-        'refresh_token' => REFRESH_TOKEN,
     ];
+
+    public function __construct()
+    {
+        $this->config['access_token']  = getenv('BASE_ACCESS_TOKEN');
+        $this->config['refresh_token'] = getenv('BASE_REFRESH_TOKEN');
+    }
 
     function test___construct()
     {
@@ -131,23 +146,44 @@ class Client extends Common
 
         $this->assertTrue(is_array($response));
     }
-    function test_request_レスポンスにerrorが含まれている場合()
+    function test_request_アクセストークン切れならExpiredAccessTokenExceptionをスローする()
     {
         $client  = new \Bolster\BaseApi\Client();
         $request = $this->getMethod('\Bolster\BaseApi\Client', 'request');
 
         $client->setHttpClient(new MockHttpRequester());
 
-        // アクセストークン切れならExpiredAccessTokenExceptionをスローする
         $client->setConfig('access_token', 'dummy');
         $this->setExpectedException('\Bolster\BaseApi\ExpiredAccessTokenException');
         $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_ACCESS_TOKEN]);
+    }
+    function test_request_1日の使用制限切れならRateLimitExceedExceptionをスローする()
+    {
+        $client  = new \Bolster\BaseApi\Client();
+        $request = $this->getMethod('\Bolster\BaseApi\Client', 'request');
 
-        // 使用制限切れならRateLimitExceedExceptionをスローする
+        $client->setHttpClient(new MockHttpRequester());
+
         $this->setExpectedException('\Bolster\BaseApi\RateLimitExceedException');
         $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_RATE_LIMIT]);
+    }
+    function test_request_1時間の使用制限切れならRateLimitExceedExceptionをスローする()
+    {
+        $client  = new \Bolster\BaseApi\Client();
+        $request = $this->getMethod('\Bolster\BaseApi\Client', 'request');
 
-        // それ以外ならBaseApiExceptionをスローする
+        $client->setHttpClient(new MockHttpRequester());
+
+        $this->setExpectedException('\Bolster\BaseApi\RateLimitExceedException');
+        $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR_HOUR_RATE_LIMIT]);
+    }
+    function test_request_それ以外ならBaseApiExceptionをスローする()
+    {
+        $client  = new \Bolster\BaseApi\Client();
+        $request = $this->getMethod('\Bolster\BaseApi\Client', 'request');
+
+        $client->setHttpClient(new MockHttpRequester());
+
         $this->setExpectedException('\Bolster\BaseApi\BaseApiException');
         $request->invokeArgs($client, ['get', MockHttpRequester::PATH_ERROR]);
     }

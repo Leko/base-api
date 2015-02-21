@@ -39,8 +39,8 @@ abstract class Common extends \PHPUnit_Framework_TestCase
             'client_id' => CLIENT_ID,
             'client_secret' => CLIENT_SECRET,
             'redirect_uri' => REDIRECT_URI,
-            'access_token' => ACCESS_TOKEN,
-            'refresh_token' => REFRESH_TOKEN,
+            'access_token' => getenv('BASE_ACCESS_TOKEN'),
+            'refresh_token' => getenv('BASE_REFRESH_TOKEN'),
             'scopes' => [
                 \Bolster\BaseApi\Client::SCOPE_READ_USERS,
                 \Bolster\BaseApi\Client::SCOPE_READ_USERS_MAIL,

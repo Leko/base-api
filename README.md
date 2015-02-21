@@ -18,7 +18,7 @@ add `bolster/base-api` to yout `composer.json`
 ### インスタンス生成
 指定可能なオプションは、[こちら](https://github.com/Leko/base-api/blob/master/source/BaseApi/Client.php#L145)を御覧下さい。
 
-```
+```php
 <?php
 
 $config = [
@@ -82,7 +82,7 @@ try {
 	$client->oauth()->refresh($_SESSION['refresh_token']);
 	$client->items()->delete(['item_id' => 100]);
 
-// 1日あたりのAPI使用回数制限に達した
+// 1日もしくは1時間あたりのAPI使用回数制限に達した
 } catch(\Base\Api\RateLimitExceedException $e) {
 	// 1分待って再送信（NOTE: 日を跨ぐまで回数はリセットされないので実用例ではない）
 	sleep(60);
@@ -194,7 +194,12 @@ try {
 ### OAuth
 - `authorize`メソッドでscopeを何も設定せず(`&scope=`で終わった状態で)送信するとデフォルト権限になる
 
+### Items
+- 価格(税込み)は、**50以上** ~ **500000以下**しか登録不可能
+- 在庫数は、**0以上** ~ **10000以下**
+
 ### Categories
+- 商品に設定されているカテゴリも削除することが可能。削除するとそのカテゴリが設定されていた商品のカテゴリからも削除される
 - 指定できるカテゴリ名は**最大30文字**、それ以上長い文字列を指定しても後ろが切り取られる
 	- 半角でも全角でも30文字。バイト数ではなく文字列長で判断されている
 - 指定できる`list_order`は**最大100000まで**。それ以上大きな値を指定しても100000に丸められる
