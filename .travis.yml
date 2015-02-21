@@ -9,7 +9,7 @@ cache:
     - vendor
 env:
   global:
-    secure: "Ce8Z2qF2zqC+O6/Ii8HZdxnVBtTYC/QEb31cridxHy58D84sn2yCupKMlDF4tr7j8QCLlSfVzW7w9YfsEXkRRgVslQSdDS1ciraTJhHee7wRb3yuXpagPMSrapMyzcn7iR+JQ+TQZjC7gh88gW8qK3BleuYT+FFF7MZHtJTb7cY="
+    secure: "e+CcP7dm6xIJIHk863pMr8naz1iY/fCyAjRf5dx3jkVs5KTpa7KhOv2paFcJ0z92vZ+ad62l4VXeIxZPZS2OWYIq+vxq96QYhj8yDI9Bo0XaCnzpDEjPyY9SvM21Y8YvKAr/32RU/bRPm4mHbn6i9H7MuSLdk3wQKBz+rHegxJc="
 before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --dev
