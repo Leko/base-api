@@ -4,6 +4,9 @@ php:
   - 5.5
   - 5.6
   - hhvm
+cache:
+  directories:
+    - vendor
 env:
   global:
     secure: "Ce8Z2qF2zqC+O6/Ii8HZdxnVBtTYC/QEb31cridxHy58D84sn2yCupKMlDF4tr7j8QCLlSfVzW7w9YfsEXkRRgVslQSdDS1ciraTJhHee7wRb3yuXpagPMSrapMyzcn7iR+JQ+TQZjC7gh88gW8qK3BleuYT+FFF7MZHtJTb7cY="
