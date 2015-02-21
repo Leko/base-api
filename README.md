@@ -1,4 +1,6 @@
 
+[![Build Status](https://travis-ci.org/Leko/base-api.svg?branch=master)](https://travis-ci.org/Leko/base-api)
+
 ## install
 
 add `bolster/base-api` to yout `composer.json`
