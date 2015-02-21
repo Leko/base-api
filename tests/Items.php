@@ -10,7 +10,7 @@ class Items extends Common
 {
     protected $dummyItem;
 
-    public function setUP()
+    public function setUp()
     {
         parent::setUp();
 
@@ -20,15 +20,6 @@ class Items extends Common
             'stock'  => 50,
         ]);
         $this->dummyItem = $item['item'];
-    }
-    public function tearDown()
-    {
-        // 商品を削除するテストで商品が消されることがあるので例外を握りつぶし
-        try {
-            $this->client->items()->delete([
-                'item_id' => $this->dummyItem['item_id'],
-            ]);
-        } catch(BaseApiException $e) {}
     }
 
     function test_all()

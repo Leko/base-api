@@ -7,6 +7,7 @@ require_once __DIR__.'/Common.php';
 class ItemCategories extends Common
 {
     protected $dummyItem;
+    protected $dummyCategory;
     protected $dummyItemCategory;
 
     public function setUp()
@@ -23,22 +24,18 @@ class ItemCategories extends Common
             'name' => 'dummy_category01'
         ]);
 
-        // それらを紐付け
-        $item_category = $this->createItemCategories($item['item']['item_id'], $category['categories'][0]['category_id']);
         $this->dummyItem = $item['item'];
+        $this->dummyCategory = $category['categories'][0];
+
+        // それらを紐付け
+        $item_category = $this->createItemCategories($this->dummyItem['item_id'], $this->dummyCategory['category_id']);
         $this->dummyItemCategory = $item_category['item_categories'][0];
     }
-    public function tearDown()
+    public function teardown()
     {
-        // 商品・カテゴリを削除するテストで商品が消されることがあるので例外を握りつぶし
-        try {
-            $this->client->items()->delete([
-                'item_id' => $this->dummyItem['item_id'],
-            ]);
-            $this->client->categories()->delete([
-                'category_id' => $this->dummyItemCategory['category_id'],
-            ]);
-        } catch(BaseApiException $e) {}
+        $this->client->categories()->delete([
+            'category_id' => $this->dummyCategory['category_id']
+        ]);
     }
 
     /**
