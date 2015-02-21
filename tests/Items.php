@@ -4,6 +4,8 @@ namespace Bolster\BaseApi\Tests;
 
 require_once __DIR__.'/Common.php';
 
+use Bolster\BaseApi\BaseApiException;
+
 class Items extends Common
 {
     protected $dummyItem;
@@ -18,6 +20,15 @@ class Items extends Common
             'stock'  => 50,
         ]);
         $this->dummyItem = $item['item'];
+    }
+    public function tearDown()
+    {
+        // 商品を削除するテストで商品が消されることがあるので例外を握りつぶし
+        try {
+            $this->client->items()->delete([
+                'item_id' => $this->dummyItem['item_id'],
+            ]);
+        } catch(BaseApiException $e) {}
     }
 
     function test_all()
