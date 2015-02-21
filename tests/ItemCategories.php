@@ -21,7 +21,7 @@ class ItemCategories extends Common
             'stock'  => 50,
         ]);
         $category = $this->client->categories()->add([
-            'name' => 'dummy_category01'
+            'name' => mb_substr(uniqid('dummy_category', true), 0, 30)
         ]);
 
         $this->dummyItem = $item['item'];
