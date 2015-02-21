@@ -11,7 +11,6 @@ class Items extends Common
     public function setUP()
     {
         parent::setUp();
-        $this->removeAllItems();
 
         $item = $this->client->items()->add([
             'title'  => 'dummy_item01',
