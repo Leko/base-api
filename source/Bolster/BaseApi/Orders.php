@@ -9,6 +9,24 @@ namespace Bolster\BaseApi;
 class Orders extends ApiAbstract
 {
     /**
+     * ステータス：未発送
+     * @var string
+     */
+    const STATUS_ORDERED = 'ordered';
+
+    /**
+     * ステータス：配送中
+     * @var string
+     */
+    const STATUS_SHIPPING = 'shipping';
+
+    /**
+     * ステータス：着荷
+     * @var string
+     */
+    const STATUS_ARRIVED = 'arrived';
+
+    /**
      * ステータス：配送済み
      * @var string
      */
