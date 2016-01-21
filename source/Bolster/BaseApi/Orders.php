@@ -21,6 +21,42 @@ class Orders extends ApiAbstract
     const STATUS_CANCELLED = 'cancelled';
 
     /**
+     * クレジットカード決済
+     * @var string
+     */
+    const PAYMENT_CREDITCARD = 'creditcard';
+
+    /**
+     * 銀行振込(ショップ口座)
+     * @var string
+     */
+    const PAYMENT_BANK_TRADE = 'bt';
+    
+    /**
+     * 代金引換
+     * @var string
+     */
+    const PAYMENT_COD = 'cod';
+
+    /**
+     * コンビニ決済
+     * @var string
+     */
+    const PAYMENT_CVS = 'cvs';
+
+    /**
+     * 銀行振込(BASE口座)
+     * @var string
+     */
+    const PAYMENT_BASE_BANK_TRADE = 'base_bt';
+
+    /**
+     * 後払い決済
+     * @var string
+     */
+    const PAYMENT_ATOBARAI = 'atobarai';
+
+    /**
      * 注文情報の一覧を取得
      * 
      * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
