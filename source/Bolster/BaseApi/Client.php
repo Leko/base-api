@@ -389,4 +389,14 @@ class Client
         $instance = $this->factory('Savings');
         return $instance;
     }
+
+    /**
+     * Savingsのインスタンスを生成する
+     * @return Savings このインスタンスの設定を引き継いたSavingsクラスのインスタンス
+     */
+    public function deliverycompanies()
+    {
+        $instance = $this->factory('DeliveryCompanies');
+        return $instance;
+    }
 }
