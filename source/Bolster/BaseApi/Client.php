@@ -391,8 +391,8 @@ class Client
     }
 
     /**
-     * Savingsのインスタンスを生成する
-     * @return Savings このインスタンスの設定を引き継いたSavingsクラスのインスタンス
+     * DeliveryCompaniesのインスタンスを生成する
+     * @return DeliveryCompanies このインスタンスの設定を引き継いたDeliveryCompaniesクラスのインスタンス
      */
     public function deliverycompanies()
     {
