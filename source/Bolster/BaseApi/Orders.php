@@ -9,6 +9,24 @@ namespace Bolster\BaseApi;
 class Orders extends ApiAbstract
 {
     /**
+     * ステータス：未発送
+     * @var string
+     */
+    const STATUS_ORDERED = 'ordered';
+
+    /**
+     * ステータス：配送中
+     * @var string
+     */
+    const STATUS_SHIPPING = 'shipping';
+
+    /**
+     * ステータス：着荷
+     * @var string
+     */
+    const STATUS_ARRIVED = 'arrived';
+
+    /**
      * ステータス：配送済み
      * @var string
      */
@@ -19,6 +37,42 @@ class Orders extends ApiAbstract
      * @var string
      */
     const STATUS_CANCELLED = 'cancelled';
+
+    /**
+     * クレジットカード決済
+     * @var string
+     */
+    const PAYMENT_CREDITCARD = 'creditcard';
+
+    /**
+     * 銀行振込(ショップ口座)
+     * @var string
+     */
+    const PAYMENT_BANK_TRADE = 'bt';
+    
+    /**
+     * 代金引換
+     * @var string
+     */
+    const PAYMENT_COD = 'cod';
+
+    /**
+     * コンビニ決済
+     * @var string
+     */
+    const PAYMENT_CVS = 'cvs';
+
+    /**
+     * 銀行振込(BASE口座)
+     * @var string
+     */
+    const PAYMENT_BASE_BANK_TRADE = 'base_bt';
+
+    /**
+     * 後払い決済
+     * @var string
+     */
+    const PAYMENT_ATOBARAI = 'atobarai';
 
     /**
      * 注文情報の一覧を取得
