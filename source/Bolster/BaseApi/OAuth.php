@@ -30,7 +30,7 @@ class OAuth extends ApiAbstract
      * 認可コードを取得するための画面へ遷移するURLを生成する
      * 
      * GET /1/oauth/authorize
-     * @see https://gist.github.com/baseinc/9777239
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_oauth_authorize.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string state リダイレクト先URLにそのまま返すパラメーター (任意)
@@ -54,7 +54,7 @@ class OAuth extends ApiAbstract
      *       よってこのメソッドを使用するなら明示的にアクセストークンとリフレッシュトークンを再セットする必要はない
      * 
      * POST /1/oauth/token
-     * @see https://gist.github.com/baseinc/9777762
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_oauth_access_token.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string code 認可コード (必須)
@@ -83,7 +83,7 @@ class OAuth extends ApiAbstract
      * NOTE: メソッド名がAPI名と異なる。tokenは先に使われているので別の名前を採用。
      * 
      * POST /1/oauth/token
-     * @see https://gist.github.com/baseinc/9778140
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_oauth_refresh_token.md
      * 
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
      */
