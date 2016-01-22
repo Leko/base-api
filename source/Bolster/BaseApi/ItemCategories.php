@@ -12,7 +12,7 @@ class ItemCategories extends ApiAbstract
      * 商品のカテゴリー情報を取得
      * 
      * GET /1/item_categories/detail/:item_id
-     * @see https://gist.github.com/baseinc/b39113c649b30878c480
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_item_categories_detail.md
      * 
      * @param int $item_id カテゴリを取得したい商品ID
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
@@ -26,7 +26,7 @@ class ItemCategories extends ApiAbstract
      * 商品のカテゴリー情報を登録
      * 
      * POST /1/item_categories/add
-     * @see https://gist.github.com/baseinc/96314f42e4db05df2513
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_item_categories_add.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_id     商品ID (必須)
@@ -42,7 +42,7 @@ class ItemCategories extends ApiAbstract
      * 商品のカテゴリー情報を削除
      * 
      * POST /1/item_categories/delete
-     * @see https://gist.github.com/baseinc/4d966562aeb6344f6fc4
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_item_categories_delete.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_category_id 商品カテゴリーID (必須)

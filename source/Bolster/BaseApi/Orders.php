@@ -80,7 +80,7 @@ class Orders extends ApiAbstract
      * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
      * 
      * GET /1/orders
-     * @see https://gist.github.com/baseinc/9760824
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_orders.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string start_ordered 注文日時はじめ yyyy-mm-dd または yyyy-mm-dd hh:mm:ss (任意)
@@ -98,7 +98,7 @@ class Orders extends ApiAbstract
      * 注文情報を取得
      * 
      * GET /1/orders/detail/:unique_key
-     * @see https://gist.github.com/baseinc/9930892
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_orders_detail.md
      * 
      * @param string $unique_key 注文番号
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
@@ -112,7 +112,7 @@ class Orders extends ApiAbstract
      * 注文情報のステータスを更新
      * 
      * POST /1/orders/edit_status
-     * @see https://gist.github.com/baseinc/9952182
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_orders_edit_status.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int    order_item_id 購入商品ID (必須)

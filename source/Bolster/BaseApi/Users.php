@@ -12,7 +12,7 @@ class Users extends ApiAbstract
      * ユーザー情報を取得
      * 
      * GET /1/users/me
-     * @see https://gist.github.com/baseinc/9759577
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_users_me.md
      * 
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
      */

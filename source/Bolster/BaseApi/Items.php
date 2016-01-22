@@ -38,7 +38,7 @@ class Items extends ApiAbstract
      * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
      * 
      * GET /1/items
-     * @see https://gist.github.com/baseinc/9910430
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string order  並び替え項目。list_order か created のいずれか (任意 デフォルト: list_order)
@@ -56,7 +56,7 @@ class Items extends ApiAbstract
      * 商品情報を取得
      * 
      * GET /1/items/detail/:item_id
-     * @see https://gist.github.com/baseinc/9912650
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_detail.md
      * 
      * @param int $item_id BASEの商品ID
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
@@ -70,7 +70,7 @@ class Items extends ApiAbstract
      * 商品情報を登録
      * 
      * POST /1/items/add
-     * @see https://gist.github.com/baseinc/10241083
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_add.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string title                       商品名 (必須)
@@ -94,7 +94,7 @@ class Items extends ApiAbstract
      * 商品情報を更新
      * 
      * POST /1/items/edit
-     * @see https://gist.github.com/baseinc/10253466
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_edit.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_id                        商品ID (必須)
@@ -120,7 +120,7 @@ class Items extends ApiAbstract
      * 商品情報を削除
      * 
      * POST /1/items/delete
-     * @see https://gist.github.com/baseinc/10254181
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_delete.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_id 商品ID (必須)
@@ -135,7 +135,7 @@ class Items extends ApiAbstract
      * 商品情報の画像を登録
      * 
      * POST /1/items/add_image
-     * @see https://gist.github.com/baseinc/10247116
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_add_image.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int    item_id   商品ID (必須)
@@ -152,7 +152,7 @@ class Items extends ApiAbstract
      * 商品情報の画像を削除
      * 
      * POST /1/items/delete_image
-     * @see https://gist.github.com/baseinc/10251257
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_delete_image.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_id  商品ID (必須)
@@ -168,7 +168,7 @@ class Items extends ApiAbstract
      * 商品情報の在庫数を更新
      * 
      * POST /1/items/edit_stock
-     * @see https://gist.github.com/baseinc/10623305
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_edit_stock.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int    item_id         商品ID (必須)
@@ -186,7 +186,7 @@ class Items extends ApiAbstract
      * 商品情報のバリエーションを削除
      * 
      * POST /1/items/delete_variation
-     * @see https://gist.github.com/baseinc/7ecebf95aae012197738
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_items_delete_variation.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int item_id      商品ID (必須)

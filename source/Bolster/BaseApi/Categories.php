@@ -14,7 +14,7 @@ class Categories extends ApiAbstract
      * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
      * 
      * GET /1/categories
-     * @see https://gist.github.com/baseinc/a3cf5ecd760922534cab
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_categories.md
      * 
      * @return array 連想配列。ドキュメントのサンプルレスポンスを参照
      */
@@ -27,7 +27,7 @@ class Categories extends ApiAbstract
      * カテゴリー情報を登録
      * 
      * POST /1/categories/add
-     * @see https://gist.github.com/baseinc/983254bab52854cde97f
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_categories_add.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string name       カテゴリー名 (必須)
@@ -43,7 +43,7 @@ class Categories extends ApiAbstract
      * カテゴリー情報を更新
      * 
      * POST /1/categories/edit
-     * @see https://gist.github.com/baseinc/bc7ff96fbe0dec990dd1
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_categories_edit.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int    category_id カテゴリーID (必須)
@@ -60,7 +60,7 @@ class Categories extends ApiAbstract
      * カテゴリー情報を削除
      * 
      * POST /1/categories/delete
-     * @see https://gist.github.com/baseinc/c58b07a2489f77879e67
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_categories_delete.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param int category_id カテゴリーID (必須)

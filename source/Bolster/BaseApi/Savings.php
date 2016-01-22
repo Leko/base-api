@@ -14,7 +14,7 @@ class Savings extends ApiAbstract
      * NOTE: API名とメソッド名が違う。indexではわかりにくいのでallにした
      * 
      * GET /1/savings
-     * @see https://gist.github.com/baseinc/5c338fa3a62e870f9597
+     * @see https://github.com/baseinc/api-docs/blob/master/base_api_v1_savings.md
      * 
      * @param array $params 指定可能なオプションは以下を参照
      *   @param string start_created 引き出し申請日時はじめ yyyy-mm-dd (任意)
